@@ -25,11 +25,8 @@ const Plinko = () => {
 	const inGameBallsCount = useGameStore((state) => state.gamesRunning);
 	const incrementInGameBallsCount = useGameStore((state) => state.incrementGamesRunning);
 	const decrementInGameBallsCount = useGameStore((state) => state.decrementGamesRunning);
-	// const [lastMultipliers, setLastMultipliers] = useState<number[]>([]);
 	const {
-		pins: pinsConfig,
 		colors,
-		ball: ballConfig,
 		engine: engineConfig,
 		world: worldConfig,
 		maxBallsCount,
@@ -89,14 +86,16 @@ const Plinko = () => {
 
 	const pins: Body[] = [];
 
-	const widthUnit = (worldWidth - pinsConfig.pinSize * 2) / (lines * 2 + 2);
-	const heightUnit = (worldHeight - pinsConfig.pinSize * 2) / (lines + 1);
+	const pinSize = 8 - lines / 4;
+
+	const widthUnit = (worldWidth - pinSize * 2) / (lines * 2 + 2);
+	const heightUnit = (worldHeight - pinSize * 2) / (lines + 1);
 	for (let i = 0; i < lines; i++) {
 		for (let j = lines - i - 1; j <= lines - i + (i + 2) * 2; j += 2) {
 			const pin = Bodies.circle(
-				widthUnit * j + pinsConfig.pinSize,
-				heightUnit * (i + 2) - pinsConfig.pinSize,
-				pinsConfig.pinSize,
+				widthUnit * j + pinSize,
+				heightUnit * (i + 2) + pinSize,
+				pinSize,
 				{
 					label: `pin-${i}`,
 					render: {
@@ -108,27 +107,6 @@ const Plinko = () => {
 			pins.push(pin);
 		}
 	}
-
-	// for (let l = 0; l < lines; l++) {
-	// 	console.log(lines);
-	// 	const pinGap = (worldWidth + pinsConfig.pinSize) / (lines + 1);
-	// 	const linePins = pinsConfig.startPins + l;
-	// 	const lineWidth = linePins * pinGap;
-	// 	for (let i = 0; i < linePins; i++) {
-	// 		const pinX =
-	// 			worldWidth / 2 - lineWidth / 2 + i * pinGap + pinGap / 2;
-	// 		const pinY = worldWidth / lines + l * pinGap + pinGap;
-	// 		const pin = Bodies.circle(pinX, pinY, pinsConfig.pinSize, {
-	// 			label: `pin-${i}`,
-	// 			render: {
-	// 				fillStyle: "#F5DCFF",
-	// 			},
-	// 			isStatic: true,
-	// 		});
-	// 		console.log(pinX, pinY);
-	// 		pins.push(pin);
-	// 	}
-	// }
 
 	const addInGameBall = () => {
 		if (inGameBallsCount > maxBallsCount) return;
@@ -143,11 +121,12 @@ const Plinko = () => {
 		(ballValue: number) => {
 			addInGameBall();
 
-			const minBallX = worldWidth / 2 + pinsConfig.pinGap;
-			const maxBallX = worldWidth / 2 - pinsConfig.pinGap + pinsConfig.pinGap / 2;
+			const minBallX = worldWidth / 2 + widthUnit;
+			const maxBallX = worldWidth / 2 - widthUnit / 2;
 			const ballX = random(minBallX, maxBallX);
-			const ballColor = ballValue <= 0 ? colors.text : colors.purple;
-			const ball = Bodies.circle(ballX, 20, ballConfig.ballSize, {
+			// const ballColor = ballValue <= 0 ? colors.text : colors.purple;
+			const ballColor = colors.purple;
+			const ball = Bodies.circle(ballX, 20, pinSize * 1.5, {
 				restitution: 1,
 				friction: 0.6,
 				label: `ball-${ballValue}`,
@@ -174,28 +153,28 @@ const Plinko = () => {
 		{
 			angle: 90,
 			render: {
-				visible: true,
+				visible: false,
 			},
 			isStatic: true,
 		}
 	);
 	const rightWall = Bodies.rectangle(
-		worldWidth - 2 * pinsConfig.pinGap - pinsConfig.pinGap - pinsConfig.pinGap / 2,
+		worldWidth - 70,
 		worldWidth / 2 - 2,
 		worldWidth * 2,
 		40,
 		{
 			angle: -90,
 			render: {
-				visible: true,
+				visible: false,
 			},
 			isStatic: true,
 		}
 	);
-	const floor = Bodies.rectangle(0, worldWidth + 10, worldWidth * 10, 30, {
+	const floor = Bodies.rectangle(0, worldWidth + 10, worldWidth * 10, 10, {
 		label: "block-1",
 		render: {
-			visible: true,
+			visible: false,
 		},
 		isStatic: true,
 	});
@@ -216,6 +195,7 @@ const Plinko = () => {
 
 		if (+ballValue <= 0) return;
 	};
+
 	const onBodyCollision = async (event: IEventCollision<Engine>) => {
 		const pairs = event.pairs;
 		for (const pair of pairs) {
