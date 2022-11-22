@@ -89,25 +89,46 @@ const Plinko = () => {
 
 	const pins: Body[] = [];
 
-	for (let l = 0; l < lines; l++) {
-		console.log(lines)
-		const linePins = pinsConfig.startPins + l;
-		const lineWidth = linePins * pinsConfig.pinGap;
-		for (let i = 0; i < linePins; i++) {
-			const pinX =
-				worldWidth / 2 - lineWidth / 2 + i * pinsConfig.pinGap + pinsConfig.pinGap / 2;
-			const pinY = worldWidth / lines + l * pinsConfig.pinGap + pinsConfig.pinGap;
-			const pin = Bodies.circle(pinX, pinY, pinsConfig.pinSize, {
-				label: `pin-${i}`,
-				render: {
-					fillStyle: "#F5DCFF",
-				},
-				isStatic: true,
-			});
-			console.log(pinX, pinY)
+	const widthUnit = (worldWidth - pinsConfig.pinSize * 2) / (lines * 2 + 2);
+	const heightUnit = (worldHeight - pinsConfig.pinSize * 2) / (lines + 1);
+	for (let i = 0; i < lines; i++) {
+		for (let j = lines - i - 1; j <= lines - i + (i + 2) * 2; j += 2) {
+			const pin = Bodies.circle(
+				widthUnit * j + pinsConfig.pinSize,
+				heightUnit * (i + 2) - pinsConfig.pinSize,
+				pinsConfig.pinSize,
+				{
+					label: `pin-${i}`,
+					render: {
+						fillStyle: "#F5DCFF",
+					},
+					isStatic: true,
+				}
+			);
 			pins.push(pin);
 		}
 	}
+
+	// for (let l = 0; l < lines; l++) {
+	// 	console.log(lines);
+	// 	const pinGap = (worldWidth + pinsConfig.pinSize) / (lines + 1);
+	// 	const linePins = pinsConfig.startPins + l;
+	// 	const lineWidth = linePins * pinGap;
+	// 	for (let i = 0; i < linePins; i++) {
+	// 		const pinX =
+	// 			worldWidth / 2 - lineWidth / 2 + i * pinGap + pinGap / 2;
+	// 		const pinY = worldWidth / lines + l * pinGap + pinGap;
+	// 		const pin = Bodies.circle(pinX, pinY, pinsConfig.pinSize, {
+	// 			label: `pin-${i}`,
+	// 			render: {
+	// 				fillStyle: "#F5DCFF",
+	// 			},
+	// 			isStatic: true,
+	// 		});
+	// 		console.log(pinX, pinY);
+	// 		pins.push(pin);
+	// 	}
+	// }
 
 	const addInGameBall = () => {
 		if (inGameBallsCount > maxBallsCount) return;
@@ -171,7 +192,7 @@ const Plinko = () => {
 			isStatic: true,
 		}
 	);
-	const floor = Bodies.rectangle(0, worldWidth + 10, worldWidth * 10, 40, {
+	const floor = Bodies.rectangle(0, worldWidth + 10, worldWidth * 10, 30, {
 		label: "block-1",
 		render: {
 			visible: true,
