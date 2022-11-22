@@ -1,0 +1,47 @@
+$width-smaller: 480px;
+$width-small: 768px;
+$width-middle: 1024px;
+$width-large: 1280px;
+$width-larger: 1535px;
+
+@mixin media-xs {
+  @media (max-width: $width-smaller) {
+    @content;
+  }
+}
+
+@mixin media-sm {
+  @media (max-width: $width-small) {
+    @content;
+  }
+}
+
+@mixin media-md {
+  @media (max-width: $width-middle) {
+    @content;
+  }
+}
+
+@mixin media-lg {
+  @media (max-width: $width-large) {
+    @content;
+  }
+}
+
+@mixin media-xl {
+  @media (max-width: $width-larger) {
+    @content;
+  }
+}
+
+@mixin media-retina {
+
+  @media (-webkit-min-device-pixel-ratio: 1.5),
+  (min--moz-device-pixel-ratio: 1.5),
+  (-o-min-device-pixel-ratio: 1.5/1),
+  (min-device-pixel-ratio: 1.5),
+  (min-resolution: 144dpi),
+  (min-resolution: 1.5dppx) {
+    @content;
+  }
+}

@@ -1,0 +1,159 @@
+@import 'styles/mixin/media';
+
+.plinko :global {
+  .plinko-container {
+    padding-top: 24px;
+    padding-bottom: 24px;
+
+    .game-box {
+      display: flex;
+      overflow: hidden;
+      border: 1px solid #4A5568;
+      border-radius: 4px;
+
+      @include media-sm {
+        flex-direction: column-reverse;
+        align-items: center;
+        border: none;
+
+        .send-ball {
+          order: -1;
+        }
+      }
+
+
+      .bet-action {
+        display: flex;
+        flex-direction: column;
+        row-gap: 24px;
+        margin: 1px;
+        border: 1px solid #2D3748;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+        width: 320px;
+        min-width: 300px;
+        height: 576px;
+        padding: 16px;
+        background-color: #1C242C;
+
+        @include media-sm {
+          width: 100%;
+          height: fit-content;
+          row-gap: 12px;
+        }
+
+        .game-type {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 8px;
+          border-radius: 4px;
+          padding: 8px;
+          background-color: var(--theme);
+
+          button {
+            border: none;
+            padding: 8px;
+            background-color: transparent;
+
+            &.active {
+              background-color: var(--primary);
+            }
+          }
+        }
+
+        .bet-amount {
+          .input-box {
+            display: flex;
+            align-items: center;
+            padding: 4px;
+
+            span {
+              margin-left: 8px;
+              margin-right: auto;
+            }
+
+            input {
+              border: none;
+              outline: none;
+              margin-left: 8px;
+              margin-right: 8px;
+              width: 100%;
+              background-color: transparent;
+              text-align: right;
+            }
+
+            div {
+              display: flex;
+              gap: 4px;
+              margin-left: auto;
+
+              button {
+                border: none;
+                padding: 8px;
+                background-color: #1c242c;
+                font-size: 12px;
+              }
+            }
+          }
+        }
+
+        .risk,
+        .rows {
+          div {
+            select {
+              border: none;
+              outline: none;
+              margin: 8px;
+              background-color: transparent;
+              width: -webkit-fill-available;
+            }
+          }
+        }
+
+        .number-of-bets {
+          div {
+            input {
+              margin: 8px;
+              border: none;
+              outline: none;
+              background: transparent;
+              width: -webkit-fill-available;
+              text-align: right;
+
+              &::-webkit-outer-spin-button,
+              &::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+              }
+            }
+          }
+        }
+
+        .highlight-hover {
+          border: 2px solid #2D3748;
+          border-radius: 4px;
+          background-color: var(--theme);
+
+          &:hover {
+            border-color: #5A6578;
+          }
+        }
+
+        .send-ball {
+          border: none;
+          padding: 12px;
+          background-color: var(--secondary);
+          font-size: 16px;
+          font-weight: 700;
+        }
+      }
+
+      .game-board {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+}

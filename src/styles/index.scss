@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;500;600;700&display=swap');
+@import './mixin/media';
+@import './mixin/variant';
+@import './mixin/button';
+
+*,
+::before,
+::after {
+  transition: all .2s ease-in-out;
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  font-family: 'Oxanium', cursive;
+  color: white;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  height: 100%;
+  background: var(--theme);
+
+  main {
+    flex-grow: 1;
+  }
+
+  footer {
+    margin-top: auto;
+  }
+}
+
+.plinko-container {
+  margin-left: 64px;
+  margin-right: 64px;
+  width: auto;
+
+  @include media-xl {}
+
+  @include media-lg {
+    margin-left: 24px;
+    margin-right: 24px;
+  }
+
+  @include media-md {}
+
+  @include media-sm {}
+
+  @include media-xs {
+    margin-left: 12px;
+    margin-right: 12px;
+  }
+}
