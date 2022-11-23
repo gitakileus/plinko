@@ -185,6 +185,11 @@ const Plinko = () => {
 	};
 
 	const onCollideWithMultiplier = async (ball: Body, multiplier: Body) => {
+		if (multiplier.label.includes("pin")) {
+			// console.log(multiplier.position.x);
+			return;
+		}
+
 		ball.collisionFilter.group = 2;
 		World.remove(engine.world, ball);
 		removeInGameBall();
@@ -217,9 +222,11 @@ const Plinko = () => {
 		const pairs = event.pairs;
 		for (const pair of pairs) {
 			const { bodyA, bodyB } = pair;
-			if (bodyB.label.includes("ball") && bodyA.label.includes("block")) {
-				// console.log(bodyA, bodyB)
-				await onCollideWithMultiplier(bodyB, bodyA);
+			if (
+				bodyB.label.includes("ball") &&
+				(bodyA.label.includes("block") || bodyA.label.includes("pin"))
+			) {
+				onCollideWithMultiplier(bodyB, bodyA);
 			}
 		}
 	};
