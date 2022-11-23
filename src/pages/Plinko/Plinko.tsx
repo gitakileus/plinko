@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { ToastContainer } from "react-toastify";
 import {
 	Bodies,
 	Body,
@@ -12,25 +13,23 @@ import {
 } from "matter-js";
 import { useGameStore } from "store/game";
 import { random } from "utils/random";
+import { sleep } from "utils";
 import { LinesType } from "./@types";
-import { config } from "./config";
+import { config, multiplier as multiplierValues } from "./config";
 import MainLayout from "layouts/MainLayout";
 import Panel from "./components/BetAction";
 import GameBoard from "./components/GameBoard";
 import styles from "./plinko.module.scss";
+import { toast } from "react-toastify";
 
 const Plinko = () => {
 	const engine = Engine.create();
 	const [lines, setLines] = useState<LinesType>(8);
+	const [risk, setRisk] = useState<"Low" | "Mid" | "High">("Low");
 	const inGameBallsCount = useGameStore((state) => state.gamesRunning);
 	const incrementInGameBallsCount = useGameStore((state) => state.incrementGamesRunning);
 	const decrementInGameBallsCount = useGameStore((state) => state.decrementGamesRunning);
-	const {
-		colors,
-		engine: engineConfig,
-		world: worldConfig,
-		maxBallsCount,
-	} = config;
+	const { colors, engine: engineConfig, world: worldConfig, maxBallsCount } = config;
 	const worldWidth: number = worldConfig.width;
 	const worldHeight: number = worldConfig.height;
 
@@ -82,7 +81,7 @@ const Plinko = () => {
 			render.canvas.remove();
 			render.textures = {};
 		};
-	}, [lines]); //eslint-disable-line
+	}, [risk, lines]); //eslint-disable-line
 
 	const pins: Body[] = [];
 
@@ -119,6 +118,7 @@ const Plinko = () => {
 
 	const addBall = useCallback(
 		(ballValue: number) => {
+			sleep(10);
 			addInGameBall();
 
 			const minBallX = worldWidth / 2 + widthUnit;
@@ -126,7 +126,7 @@ const Plinko = () => {
 			const ballX = random(minBallX, maxBallX);
 			// const ballColor = ballValue <= 0 ? colors.text : colors.purple;
 			const ballColor = colors.purple;
-			const ball = Bodies.circle(ballX, 20, pinSize * 1.5, {
+			const ball = Bodies.circle(ballX, 30, pinSize * 1.5, {
 				restitution: 1,
 				friction: 0.6,
 				label: `ball-${ballValue}`,
@@ -142,11 +142,11 @@ const Plinko = () => {
 			});
 			Composite.add(engine.world, ball);
 		},
-		[lines] //eslint-disable-line
+		[risk, lines] //eslint-disable-line
 	);
 
 	const leftWall = Bodies.rectangle(
-		worldWidth / 3 - 60,
+		worldWidth / 3 - 70,
 		worldWidth / 2 - 2,
 		worldWidth * 2,
 		40,
@@ -159,7 +159,7 @@ const Plinko = () => {
 		}
 	);
 	const rightWall = Bodies.rectangle(
-		worldWidth - 70,
+		worldWidth - 98,
 		worldWidth / 2 - 2,
 		worldWidth * 2,
 		40,
@@ -171,7 +171,7 @@ const Plinko = () => {
 			isStatic: true,
 		}
 	);
-	const floor = Bodies.rectangle(0, worldWidth + 10, worldWidth * 10, 10, {
+	const floor = Bodies.rectangle(0, worldWidth, worldWidth * 10, 1, {
 		label: "block-1",
 		render: {
 			visible: false,
@@ -190,8 +190,18 @@ const Plinko = () => {
 		World.remove(engine.world, ball);
 		removeInGameBall();
 		const ballValue = ball.label.split("-")[1];
-		const multiplierValue = +multiplier.label.split("-")[1] as Number;
-		console.log(multiplierValue);
+		const xPos = ball.position.x;
+		const multiplierValue =
+			multiplierValues[risk][lines / 4 - 2][
+				Math.floor((xPos - pinSize * 3) / (widthUnit * 2))
+			];
+		console.log("Risk:", risk, "lines: ", lines);
+		console.log("betValue:", ballValue, "multiplier:", multiplierValue);
+		toast.success(
+			<div style={{ color: "black", fontSize: "14px" }}>
+				You earned ${((ballValue as any) * multiplierValue).toFixed(3)}
+			</div>
+		);
 
 		if (+ballValue <= 0) return;
 	};
@@ -200,8 +210,10 @@ const Plinko = () => {
 		const pairs = event.pairs;
 		for (const pair of pairs) {
 			const { bodyA, bodyB } = pair;
-			if (bodyB.label.includes("ball") && bodyA.label.includes("block"))
+			if (bodyB.label.includes("ball") && bodyA.label.includes("block")) {
+				// console.log(bodyA, bodyB)
 				await onCollideWithMultiplier(bodyB, bodyA);
+			}
 		}
 	};
 
@@ -215,12 +227,26 @@ const Plinko = () => {
 						inGameBallsCount={inGameBallsCount}
 						onChangeLines={setLines}
 						onRunBet={bet}
+						onChangeRisk={setRisk}
 					/>
 					<div className="game-board">
-						<GameBoard />
+						<GameBoard lines={lines} risk={risk} pinSize={pinSize} />
 					</div>
 				</div>
 			</div>
+			<ToastContainer
+				position="top-right"
+				autoClose={1000}
+				hideProgressBar={true}
+				newestOnTop={false}
+				closeOnClick
+				pauseOnHover={false}
+				pauseOnFocusLoss={false}
+				rtl={false}
+				limit={3}
+				draggable
+				style={{ margin: "2px" }}
+			/>
 		</MainLayout>
 	);
 };

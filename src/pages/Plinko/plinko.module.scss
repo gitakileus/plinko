@@ -153,6 +153,20 @@
         flex: 1;
         align-items: center;
         justify-content: center;
+
+        .multiplier-box {
+          display: flex;
+
+          div {
+            flex-grow: 1;
+            border-radius: 4px;
+            width: -webkit-fill-available;
+            padding-top: 4px;
+            padding-bottom: 2px;
+            text-align: center;
+            color: white;
+          }
+        }
       }
     }
   }

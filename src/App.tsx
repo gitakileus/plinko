@@ -10,6 +10,7 @@ import {
 } from "@solana/wallet-adapter-wallets";
 import type { WalletError } from "@solana/wallet-adapter-base";
 import "@solana/wallet-adapter-react-ui/styles.css";
+import "react-toastify/dist/ReactToastify.css";
 import { devnetRPC, mainnetRPC } from "constant";
 import Plinko from "pages/Plinko";
 
@@ -32,19 +33,21 @@ const App = () => {
 		console.log("Wallet Connection Error:", error);
 	};
 	return (
-		<ConnectionProvider endpoint={endpoint}>
-			<WalletProvider
-				wallets={wallets}
-				onError={walletConnectionError}
-				autoConnect={true}
-			>
-				<WalletModalProvider>
-					<div className="App">
-						<Plinko />
-					</div>
-				</WalletModalProvider>
-			</WalletProvider>
-		</ConnectionProvider>
+		<>
+			<ConnectionProvider endpoint={endpoint}>
+				<WalletProvider
+					wallets={wallets}
+					onError={walletConnectionError}
+					autoConnect={true}
+				>
+					<WalletModalProvider>
+						<div className="App">
+							<Plinko />
+						</div>
+					</WalletModalProvider>
+				</WalletProvider>
+			</ConnectionProvider>
+		</>
 	);
 };
 

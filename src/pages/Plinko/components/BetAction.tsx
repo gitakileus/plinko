@@ -5,22 +5,34 @@ import { maxBallsCount } from "../config";
 type PlinkoBetActions = {
 	onRunBet: (betValue: number) => void;
 	onChangeLines: (lines: LinesType) => void;
+	onChangeRisk: (risk: "Low" | "Mid" | "High") => void;
 	inGameBallsCount: number;
 };
 
-const BetAction = ({ onRunBet, onChangeLines, inGameBallsCount }: PlinkoBetActions) => {
+const BetAction = ({
+	onRunBet,
+	onChangeLines,
+	onChangeRisk,
+	inGameBallsCount,
+}: PlinkoBetActions) => {
 	const isLoading = false;
 	const currentBalance = 100000;
 	const isAuth = true;
 	const [betValue, setBetValue] = useState<number>(0);
 	const [isAuto, setIsAuto] = useState(false);
 	const [autoBallCount, setAutoBallCount] = useState<number>(1);
-	const maxLinesQnt = 16;
+	// const maxLinesQnt = 16;
 	const riskOptions: string[] = ["Low", "Mid", "High"];
-	const linesOptions: number[] = [];
-	for (let i = 8; i <= maxLinesQnt; i++) {
-		linesOptions.push(i);
-	}
+	const linesOptions: number[] = [8, 12, 16];
+	// for (let i = 8; i <= maxLinesQnt; i++) {
+	// 	linesOptions.push(i);
+	// }
+
+	const handleChangeRisk = (e: ChangeEvent<HTMLSelectElement>) => {
+		if (!isAuth || isLoading) return;
+		e.preventDefault();
+		onChangeRisk(e.target.value as any);
+	};
 
 	const handleChangeBetValue = (e: ChangeEvent<HTMLInputElement>) => {
 		if (!isAuth || isLoading) return;
@@ -99,7 +111,11 @@ const BetAction = ({ onRunBet, onChangeLines, inGameBallsCount }: PlinkoBetActio
 			<div className="risk">
 				<span>Risk</span>
 				<div className="highlight-hover">
-					<select defaultValue="Low">
+					<select
+						disabled={inGameBallsCount > 0}
+						onChange={handleChangeRisk}
+						defaultValue="Low"
+					>
 						{riskOptions.map((risk) => (
 							<option key={risk} value={risk} style={{ color: "black" }}>
 								{risk}
