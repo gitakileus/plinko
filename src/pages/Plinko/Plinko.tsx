@@ -242,9 +242,7 @@ const Plinko = () => {
 				pauseOnHover={false}
 				pauseOnFocusLoss={false}
 				rtl={false}
-				limit={3}
 				draggable
-				style={{ margin: "2px" }}
 			/>
 		</MainLayout>
 	);
