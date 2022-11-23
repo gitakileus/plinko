@@ -19,7 +19,7 @@ import MainLayout from "layouts/MainLayout";
 import Panel from "./components/BetAction";
 import GameBoard from "./components/GameBoard";
 import styles from "./plinko.module.scss";
-import { toast } from "react-toastify";
+import { toast, Zoom } from "react-toastify";
 
 const Plinko = () => {
 	const engine = Engine.create();
@@ -255,13 +255,15 @@ const Plinko = () => {
 			</div>
 			<ToastContainer
 				position="top-right"
-				autoClose={1000}
+				autoClose={100}
 				hideProgressBar={true}
+				limit={5}
 				newestOnTop={false}
 				closeOnClick
 				pauseOnHover={false}
 				pauseOnFocusLoss={false}
 				rtl={false}
+				transition={Zoom}
 				draggable
 			/>
 		</MainLayout>

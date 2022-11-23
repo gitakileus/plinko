@@ -153,7 +153,13 @@
         display: flex;
         flex: 1;
         justify-content: center;
-        margin-top: -60px;
+        align-items: center;
+        #plinko {
+          margin-top: -100px;
+          @include media-sm {
+            margin-top: -80px;
+          }
+        }
 
         .multiplier-box {
           display: flex;
