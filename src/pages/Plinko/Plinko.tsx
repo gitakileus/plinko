@@ -118,7 +118,6 @@ const Plinko = () => {
 
 	const addBall = useCallback(
 		(ballValue: number) => {
-			sleep(10);
 			addInGameBall();
 
 			const minBallX = worldWidth / 2 + widthUnit;

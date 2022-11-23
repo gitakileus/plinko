@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import { LinesType } from "../@types";
 import { maxBallsCount } from "../config";
 
@@ -9,6 +9,8 @@ type PlinkoBetActions = {
 	inGameBallsCount: number;
 };
 
+let timerId: any = null;
+
 const BetAction = ({
 	onRunBet,
 	onChangeLines,
@@ -18,9 +20,14 @@ const BetAction = ({
 	const isLoading = false;
 	const currentBalance = 100000;
 	const isAuth = true;
-	const [betValue, setBetValue] = useState<number>(0);
+	const [betValue, setBetValue] = useState<number>(1);
 	const [isAuto, setIsAuto] = useState(false);
 	const [autoBallCount, setAutoBallCount] = useState<number>(1);
+
+	const [curId, setCurId] = useState<number>(0);
+	const curIdRef = useRef<any>(null);
+
+	curIdRef.current = curId;
 	// const maxLinesQnt = 16;
 	const riskOptions: string[] = ["Low", "Mid", "High"];
 	const linesOptions: number[] = [8, 12, 16];
@@ -72,19 +79,32 @@ const BetAction = ({
 	};
 
 	const handleRunBet = async () => {
+		if (timerId) return;
 		if (!isAuth || isLoading) return;
 		if (betValue <= 0 || betValue === ("" as any)) return;
 		if (inGameBallsCount >= maxBallsCount) return;
 
+		if (!isAuto) {
+			onRunBet(betValue);
+			return;
+		}
+
 		const count = !isAuto ? 1 : isNaN(autoBallCount) ? 1 : autoBallCount;
 		setAutoBallCount(count);
 
-		for (let i = 0; i < count; i++) {
-			if (betValue > currentBalance) {
-				setBetValue(currentBalance);
+		timerId = setInterval(() => {
+			if (curIdRef.current === count) {
+				setCurId(0);
+				clearInterval(timerId);
+				timerId = null;
+			} else {
+				if (betValue > currentBalance) {
+					setBetValue(currentBalance);
+				}
+				onRunBet(betValue);
+				setCurId((prev) => prev + 1);
 			}
-			onRunBet(betValue);
-		}
+		}, 300);
 	};
 
 	return (
