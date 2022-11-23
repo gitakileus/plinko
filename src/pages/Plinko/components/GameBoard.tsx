@@ -5,9 +5,10 @@ type Props = {
 	lines: LinesType;
 	risk: "Low" | "Mid" | "High";
 	pinSize: number;
+	activeBlock: number;
 };
 
-const GameBoard = ({ lines, risk = "Low", pinSize }: Props) => {
+const GameBoard = ({ lines, risk = "Low", pinSize, activeBlock }: Props) => {
 	return (
 		<div>
 			<div id="plinko" />
@@ -24,8 +25,12 @@ const GameBoard = ({ lines, risk = "Low", pinSize }: Props) => {
 						style={{
 							background: color[index + 8 - lines / 2] || color[lines / 2 - index + 8],
 							fontSize: `${14 - lines / 4}px`,
+							boxShadow: `0px 3px 0px ${
+								color[index + 8 - lines / 2] || color[lines / 2 - index + 8]
+							}99`,
 						}}
 						key={String(mul) + String(index)}
+						className={activeBlock === index ? "highlighted" : ""}
 					>
 						{mul}
 					</div>

@@ -13,7 +13,6 @@ import {
 } from "matter-js";
 import { useGameStore } from "store/game";
 import { random } from "utils/random";
-import { sleep } from "utils";
 import { LinesType } from "./@types";
 import { config, multiplier as multiplierValues } from "./config";
 import MainLayout from "layouts/MainLayout";
@@ -27,6 +26,7 @@ const Plinko = () => {
 	const [lines, setLines] = useState<LinesType>(8);
 	const [risk, setRisk] = useState<"Low" | "Mid" | "High">("Low");
 	const inGameBallsCount = useGameStore((state) => state.gamesRunning);
+	const [activeBlock, setActiveBlock] = useState(0);
 	const incrementInGameBallsCount = useGameStore((state) => state.incrementGamesRunning);
 	const decrementInGameBallsCount = useGameStore((state) => state.decrementGamesRunning);
 	const { colors, engine: engineConfig, world: worldConfig, maxBallsCount } = config;
@@ -194,6 +194,7 @@ const Plinko = () => {
 			multiplierValues[risk][lines / 4 - 2][
 				Math.floor((xPos - pinSize * 3) / (widthUnit * 2))
 			];
+		setActiveBlock(Math.floor((xPos - pinSize * 3) / (widthUnit * 2)));
 		console.log("Risk:", risk, "lines: ", lines);
 		console.log("betValue:", ballValue, "multiplier:", multiplierValue);
 		toast.success(
@@ -204,6 +205,13 @@ const Plinko = () => {
 
 		if (+ballValue <= 0) return;
 	};
+
+	useEffect(() => {
+		if (activeBlock === -1) return;
+		setTimeout(() => {
+			setActiveBlock(-1);
+		}, 100);
+	}, [activeBlock]);
 
 	const onBodyCollision = async (event: IEventCollision<Engine>) => {
 		const pairs = event.pairs;
@@ -229,7 +237,12 @@ const Plinko = () => {
 						onChangeRisk={setRisk}
 					/>
 					<div className="game-board">
-						<GameBoard lines={lines} risk={risk} pinSize={pinSize} />
+						<GameBoard
+							lines={lines}
+							risk={risk}
+							pinSize={pinSize}
+							activeBlock={activeBlock}
+						/>
 					</div>
 				</div>
 			</div>

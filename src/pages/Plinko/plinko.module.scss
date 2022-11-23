@@ -158,13 +158,21 @@
           display: flex;
 
           div {
+            position: relative;
             flex-grow: 1;
+            box-shadow: 0 4px;
             border-radius: 4px;
             width: -webkit-fill-available;
             padding-top: 4px;
             padding-bottom: 2px;
             text-align: center;
             color: white;
+            transition: all .2s ease-in-out;
+
+            &.highlighted {
+              animation-name: bounce;
+              animation-duration: 300ms;
+            }
           }
         }
       }
