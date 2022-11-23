@@ -73,6 +73,7 @@ const BetAction = ({
 
 	const handleRunBet = async () => {
 		if (!isAuth || isLoading) return;
+		if (betValue <= 0 || betValue === ("" as any)) return;
 		if (inGameBallsCount >= maxBallsCount) return;
 
 		const count = !isAuto ? 1 : isNaN(autoBallCount) ? 1 : autoBallCount;
