@@ -1,4 +1,5 @@
 import { ChangeEvent, useRef, useState } from "react";
+import { toast } from "react-toastify";
 import { LinesType } from "../@types";
 import { maxBallsCount } from "../config";
 
@@ -81,7 +82,12 @@ const BetAction = ({
 	const handleRunBet = async () => {
 		if (timerId) return;
 		if (!isAuth || isLoading) return;
-		if (betValue <= 0 || betValue === ("" as any)) return;
+		if (betValue <= 0 || betValue === ("" as any)) {
+			toast.error(
+				<div style={{ color: "red", fontSize: "18px", }}>Must place a bet above $0!</div>
+			);
+			return;
+		}
 		if (inGameBallsCount >= maxBallsCount) return;
 
 		if (!isAuto) {
