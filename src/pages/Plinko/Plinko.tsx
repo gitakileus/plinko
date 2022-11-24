@@ -185,11 +185,6 @@ const Plinko = () => {
 	};
 
 	const onCollideWithMultiplier = async (ball: Body, multiplier: Body) => {
-		if (multiplier.label.includes("pin")) {
-			// console.log(multiplier.position.x);
-			return;
-		}
-
 		ball.collisionFilter.group = 2;
 		World.remove(engine.world, ball);
 		removeInGameBall();
@@ -222,16 +217,49 @@ const Plinko = () => {
 		const pairs = event.pairs;
 		for (const pair of pairs) {
 			const { bodyA, bodyB } = pair;
-			if (
-				bodyB.label.includes("ball") &&
-				(bodyA.label.includes("block") || bodyA.label.includes("pin"))
-			) {
+			if (bodyB.label.includes("ball") && bodyA.label.includes("block")) {
 				onCollideWithMultiplier(bodyB, bodyA);
 			}
 		}
 	};
 
+	const onBounceCollision = async (event: IEventCollision<Engine>) => {
+		const pairs = event.pairs;
+		for (const pair of pairs) {
+			const { bodyA, bodyB } = pair;
+			if (bodyB.label.includes("ball") && bodyA.label.includes("pin")) {
+				const xPos = bodyA.position.x;
+				const yPos = bodyA.position.y;
+				console.log(xPos, yPos);
+				let radius = pinSize;
+				let bounceEffect: any = null;
+				let bounceTimer = setInterval(() => {
+					bounceEffect !== null && World.remove(engine.world, bounceEffect);
+					bounceEffect = Bodies.circle(xPos, yPos, radius, {
+						collisionFilter: { group: -1 },
+						render: {
+							fillStyle: "#fff3",
+							// strokeStyle: "#fff3",
+							// lineWidth: 0.3 * radius / pinSize,
+						},
+						isStatic: true,
+					});
+					Composite.add(engine.world, bounceEffect);
+					// setTimeout(() => {
+					// 	World.remove(engine.world, bounceEffect);
+					// }, 10);
+					radius = radius + pinSize / 8;
+					if (radius > pinSize * 3) {
+						World.remove(engine.world, bounceEffect);
+						clearInterval(bounceTimer);
+					}
+				}, 10);
+			}
+		}
+	};
+
 	Events.on(engine, "collisionActive", onBodyCollision);
+	Events.on(engine, "collisionStart", onBounceCollision);
 
 	return (
 		<MainLayout title="PLINKO" className={styles.plinko}>
