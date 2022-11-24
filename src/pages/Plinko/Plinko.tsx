@@ -64,7 +64,7 @@ const Plinko = () => {
 				},
 			},
 			options: {
-				background: colors.background,
+				background: "#1a2c38",
 				hasBounds: true,
 				width: worldWidth,
 				height: worldHeight,
@@ -85,7 +85,7 @@ const Plinko = () => {
 
 	const pins: Body[] = [];
 
-	const pinSize = 8 - lines / 4;
+	const pinSize = 14 - lines / 2;
 
 	const widthUnit = (worldWidth - pinSize * 2) / (lines * 2 + 2);
 	const heightUnit = (worldHeight - pinSize * 2) / (lines + 1);
@@ -121,11 +121,10 @@ const Plinko = () => {
 			addInGameBall();
 
 			const minBallX = worldWidth / 2 + widthUnit;
-			const maxBallX = worldWidth / 2 - widthUnit / 2;
+			const maxBallX = worldWidth / 2 - widthUnit;
 			const ballX = random(minBallX, maxBallX);
-			// const ballColor = ballValue <= 0 ? colors.text : colors.purple;
 			const ballColor = colors.purple;
-			const ball = Bodies.circle(ballX, 30, pinSize * 1.5, {
+			const ball = Bodies.circle(ballX, 80 - (lines / 4) * 10, pinSize * 1.5, {
 				restitution: 1,
 				friction: 0.6,
 				label: `ball-${ballValue}`,
@@ -145,7 +144,7 @@ const Plinko = () => {
 	);
 
 	const leftWall = Bodies.rectangle(
-		worldWidth / 3 - 70,
+		worldWidth / 3 - 90,
 		worldWidth / 2 - 2,
 		worldWidth * 2,
 		40,
@@ -158,7 +157,7 @@ const Plinko = () => {
 		}
 	);
 	const rightWall = Bodies.rectangle(
-		worldWidth - 98,
+		worldWidth - 160,
 		worldWidth / 2 - 2,
 		worldWidth * 2,
 		40,
@@ -170,7 +169,7 @@ const Plinko = () => {
 			isStatic: true,
 		}
 	);
-	const floor = Bodies.rectangle(0, worldWidth, worldWidth * 10, 1, {
+	const floor = Bodies.rectangle(0, worldWidth + 1, worldWidth * 10, 1, {
 		label: "block-1",
 		render: {
 			visible: false,
@@ -271,14 +270,12 @@ const Plinko = () => {
 						onRunBet={bet}
 						onChangeRisk={setRisk}
 					/>
-					<div className="game-board">
-						<GameBoard
-							lines={lines}
-							risk={risk}
-							pinSize={pinSize}
-							activeBlock={activeBlock}
-						/>
-					</div>
+					<GameBoard
+						lines={lines}
+						risk={risk}
+						pinSize={pinSize}
+						activeBlock={activeBlock}
+					/>
 				</div>
 			</div>
 			<ToastContainer

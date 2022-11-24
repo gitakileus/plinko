@@ -15,11 +15,11 @@ const engine = {
 };
 
 const world = {
-	width: 500,
-	height: 500,
+	width: 750,
+	height: 750,
 };
 
-export const maxBallsCount = 15;
+export const maxBallsCount = 100;
 
 export const config = {
 	pins,

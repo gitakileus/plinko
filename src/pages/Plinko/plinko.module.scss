@@ -1,6 +1,9 @@
 @import 'styles/mixin/media';
 
 .plinko :global {
+  display: flex;
+  justify-content: center;
+
   .plinko-container {
     padding-top: 24px;
     padding-bottom: 24px;
@@ -10,11 +13,18 @@
       overflow: hidden;
       border: 1px solid #4A5568;
       border-radius: 4px;
+      height: 100%;
+      min-height: 740px;
 
-      @include media-sm {
+      @include media-md {
         flex-direction: column-reverse;
         align-items: center;
         gap: 32px;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 600px;
+        height: auto;
+        min-height: 0px;
         border: none;
 
         .send-ball {
@@ -29,15 +39,12 @@
         row-gap: 24px;
         margin: 1px;
         border: 1px solid #2D3748;
-        border-top-left-radius: 4px;
-        border-bottom-left-radius: 4px;
-        width: 320px;
-        min-width: 300px;
-        height: 576px;
+        border-radius: 4px;
+        width: 280px;
         padding: 16px;
         background-color: #1C242C;
 
-        @include media-sm {
+        @include media-md {
           width: 100%;
           height: fit-content;
           row-gap: 12px;
@@ -154,18 +161,28 @@
         flex: 1;
         justify-content: center;
         align-items: center;
+        overflow: hidden;
+        background-color: #1a2c38;
 
         #plinko {
           position: relative;
-          margin-top: -100px;
+          // margin-top: -100px;
 
-          @include media-sm {
-            margin-top: -80px;
-          }
+          // @include media-sm {
+          //   margin-top: -80px;
+          // }
         }
 
         .multiplier-box {
           display: flex;
+          margin-bottom: 20px;
+
+          @media (max-width: 600px) {
+            margin-bottom: -40px;
+          }
+          @include media-xs {
+            margin-bottom: -70px;
+          }
 
           div {
             position: relative;

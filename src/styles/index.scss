@@ -55,15 +55,16 @@ body {
 }
 
 .plinko-container {
-  margin-left: 64px;
-  margin-right: 64px;
-  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+  width: 1200px;
 
   @include media-xl {}
 
   @include media-lg {
     margin-left: 24px;
     margin-right: 24px;
+    width: -webkit-fill-available;
   }
 
   @include media-md {}
