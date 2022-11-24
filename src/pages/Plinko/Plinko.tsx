@@ -194,7 +194,10 @@ const Plinko = () => {
 			multiplierValues[risk][lines / 4 - 2][
 				Math.floor((xPos - pinSize * 3) / (widthUnit * 2))
 			];
-		setActiveBlock(Math.floor((xPos - pinSize * 3) / (widthUnit * 2)));
+		setActiveBlock(-1);
+		setTimeout(() => {
+			setActiveBlock(Math.floor((xPos - pinSize * 3) / (widthUnit * 2)));
+		}, 10);
 		console.log("Risk:", risk, "lines: ", lines);
 		console.log("betValue:", ballValue, "multiplier:", multiplierValue);
 		toast.success(
@@ -205,13 +208,6 @@ const Plinko = () => {
 
 		if (+ballValue <= 0) return;
 	};
-
-	useEffect(() => {
-		if (activeBlock === -1) return;
-		setTimeout(() => {
-			setActiveBlock(-1);
-		}, 100);
-	}, [activeBlock]);
 
 	const onBodyCollision = async (event: IEventCollision<Engine>) => {
 		const pairs = event.pairs;
