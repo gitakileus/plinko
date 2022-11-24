@@ -123,7 +123,6 @@ const Plinko = () => {
 			const minBallX = worldWidth / 2 + widthUnit;
 			const maxBallX = worldWidth / 2 - widthUnit;
 			const ballX = random(minBallX, maxBallX);
-			// const ballColor = colors.purple;
 			const ballColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
 			const ball = Bodies.circle(ballX, 80 - (lines / 4) * 10, pinSize * 1.8, {
 				restitution: 1,
@@ -226,7 +225,6 @@ const Plinko = () => {
 			if (bodyB.label.includes("ball") && bodyA.label.includes("pin")) {
 				const xPos = bodyA.position.x;
 				const yPos = bodyA.position.y;
-				console.log(xPos, yPos);
 				let radius = pinSize;
 				let bounceEffect: any = null;
 				let bounceTimer = setInterval(() => {
@@ -235,15 +233,10 @@ const Plinko = () => {
 						collisionFilter: { group: -1 },
 						render: {
 							fillStyle: "#fff3",
-							// strokeStyle: "#fff3",
-							// lineWidth: 0.3 * radius / pinSize,
 						},
 						isStatic: true,
 					});
 					Composite.add(engine.world, bounceEffect);
-					// setTimeout(() => {
-					// 	World.remove(engine.world, bounceEffect);
-					// }, 10);
 					radius = radius + pinSize / 8;
 					if (radius > pinSize * 3) {
 						World.remove(engine.world, bounceEffect);
