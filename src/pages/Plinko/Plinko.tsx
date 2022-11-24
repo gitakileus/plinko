@@ -29,7 +29,7 @@ const Plinko = () => {
 	const [activeBlock, setActiveBlock] = useState(0);
 	const incrementInGameBallsCount = useGameStore((state) => state.incrementGamesRunning);
 	const decrementInGameBallsCount = useGameStore((state) => state.decrementGamesRunning);
-	const { colors, engine: engineConfig, world: worldConfig, maxBallsCount } = config;
+	const { engine: engineConfig, world: worldConfig, maxBallsCount } = config;
 	const worldWidth: number = worldConfig.width;
 	const worldHeight: number = worldConfig.height;
 
@@ -123,8 +123,9 @@ const Plinko = () => {
 			const minBallX = worldWidth / 2 + widthUnit;
 			const maxBallX = worldWidth / 2 - widthUnit;
 			const ballX = random(minBallX, maxBallX);
-			const ballColor = colors.purple;
-			const ball = Bodies.circle(ballX, 80 - (lines / 4) * 10, pinSize * 1.5, {
+			// const ballColor = colors.purple;
+			const ballColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+			const ball = Bodies.circle(ballX, 80 - (lines / 4) * 10, pinSize * 1.8, {
 				restitution: 1,
 				friction: 0.6,
 				label: `ball-${ballValue}`,
@@ -257,7 +258,7 @@ const Plinko = () => {
 		}
 	};
 
-	Events.on(engine, "collisionActive", onBodyCollision);
+	Events.on(engine, "collisionStart", onBodyCollision);
 	Events.on(engine, "collisionStart", onBounceCollision);
 
 	return (
