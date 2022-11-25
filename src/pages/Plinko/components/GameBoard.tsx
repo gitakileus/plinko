@@ -21,6 +21,10 @@ const GameBoard = ({
 		width: 0,
 		height: 0,
 	});
+	const [bottom, setBottom] = useState(250);
+	const boardRef = useRef<any>(null);
+	const contentRef = useRef<any>(null);
+	const resultRef = useRef<any>(null);
 	useEffect(() => {
 		const handleResize = () => {
 			setDimentions({ width: window.innerWidth, height: window.innerHeight });
@@ -29,9 +33,31 @@ const GameBoard = ({
 		handleResize();
 	}, []);
 
-	useEffect(() => {}, [dimentions]);
-	const boardRef = useRef<any>(null);
-	const contentRef = useRef<any>(null);
+	useEffect(() => {
+		// for (let i = 0; i < (resultRef.current.innerHTML.match(/<button/g) || []).length; i++)
+		// 	resultRef.current.children[i].style.opacity = "1";
+		setBottom((prev) => prev - 50);
+	}, [multiplierHistory]);
+
+	useEffect(() => {
+		const width = dimentions.width;
+		if (width >= 1000) {
+			contentRef.current.style.scale = 1;
+			boardRef.current.style.height = "auto";
+			resultRef.current.style.scale = 1;
+			resultRef.current.style.top = "50%";
+		} else if (width < 1000 && width >= 424) {
+			contentRef.current.style.scale = 0.6;
+			boardRef.current.style.height = "380px";
+			resultRef.current.style.scale = 0.6;
+			resultRef.current.style.top = "20%";
+		} else {
+			contentRef.current.style.scale = (width - 24) / 660;
+			boardRef.current.style.height = `${width - 24}px`;
+			resultRef.current.style.scale = 0.6;
+			resultRef.current.style.top = "20%";
+		}
+	}, [dimentions]);
 
 	return (
 		<div className="game-board" ref={boardRef}>
@@ -65,20 +91,22 @@ const GameBoard = ({
 					))}
 				</div>
 			</div>
-			<div className="multiplier-history">
-				{multiplierHistory.map((multiplier, index) => {
-					if (index > 3 || !multiplier) return null;
-					return (
-						<button
-							key={`${multiplier.mul}${index}${Math.random()}`}
-							style={{
-								backgroundColor: color[lines / 4 - 2][multiplier.index]?.bg,
-							}}
-						>
-							{multiplier.mul}x
-						</button>
-					);
-				})}
+			<div className="multiplier-history" ref={resultRef}>
+				<div id="multi-container" style={{ bottom: `${bottom}px` }}>
+					{multiplierHistory.map((multiplier, index) => {
+						return (
+							<button
+								key={`${multiplier.mul}${index}${Math.random()}`}
+								style={{
+									backgroundColor: color[lines / 4 - 2][multiplier.index]?.bg,
+									// opacity: index === 0 ? 0.2 : 1,
+								}}
+							>
+								{multiplier.mul}x
+							</button>
+						);
+					})}
+				</div>
 			</div>
 		</div>
 	);

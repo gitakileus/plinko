@@ -14,6 +14,11 @@
       font-weight: 600;
     }
 
+    @media (max-width: 999px) {
+      padding-top: 24px;
+      max-width: 400px;
+    }
+
     .game-box {
       display: flex;
       overflow: hidden;
@@ -22,35 +27,13 @@
       border-bottom: 3px solid var(--background);
       background: var(--primary);
 
-      // @include media-md {
-      //   flex-direction: column-reverse;
-      //   align-items: center;
-      //   gap: 32px;
-      //   margin-left: auto;
-      //   margin-right: auto;
-      //   max-width: 600px;
-      //   height: auto;
-      //   min-height: 0px;
-      //   border: none;
-
-      //   .send-ball {
-      //     order: -1;
-      //   }
-      // }
-
-
       .bet-action {
         display: flex;
         flex-direction: column;
         row-gap: 12px;
-        width: 300px;
+        min-width: 300px;
         padding: 12px;
         background-color: var(--background);
-
-        // @include media-md {
-        //   width: 100%;
-        //   height: fit-content;
-        // }
 
         .game-type {
           display: grid;
@@ -183,13 +166,37 @@
         }
       }
 
+      @media (max-width: 999px) {
+        flex-direction: column-reverse;
+        height: auto;
+        border: none;
+
+        .bet-action {
+          width: auto;
+
+          .bet-amount {
+            order: -3;
+          }
+
+          .send-ball {
+            order: -2;
+          }
+
+          .rows,
+          .risk,
+          .number-of-bets {
+            order: -1;
+          }
+        }
+      }
+
       .game-board {
         position: relative;
         display: flex;
-        flex: 1;
         justify-content: center;
         align-items: center;
         overflow: hidden;
+        width: 100%;
 
         #plinko {
           position: relative;
@@ -231,22 +238,30 @@
           position: absolute;
           top: 50%;
           right: 5%;
-          transform: translateY(-50%);
           display: flex;
           flex-direction: column;
+          transform: translateY(-50%);
+          width: 50px;
           height: 200px;
           overflow-y: hidden;
           border-radius: 12px;
 
-          button {
-            margin-bottom: 1px;
-            border: none;
-            border-radius: 0px;
-            outline: none;
+          #multi-container {
+            position: absolute;
+            left: 0;
             width: 50px;
-            height: 50px;
-            font-weight: 700;
-            color: #000c;
+            height: auto;
+
+            button {
+              border: none;
+              border-radius: 0px;
+              outline: none;
+              width: 50px;
+              height: 50px;
+              font-weight: 700;
+              color: #000c;
+              transition: all 1s ease-in-out;
+            }
           }
         }
       }

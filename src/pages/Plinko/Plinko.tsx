@@ -199,11 +199,15 @@ const Plinko = () => {
 		}, 10);
 		console.log("Risk:", risk, "lines: ", lines);
 		console.log("betValue:", ballValue, "multiplier:", multiplierValue);
+		// setLastMultipliers((prev) => [
+		// 	{ mul: multiplierValue, index: Math.floor((xPos - pinSize * 3) / (widthUnit * 2)) },
+		// 	prev[0],
+		// 	prev[1],
+		// 	prev[2],
+		// ]);
 		setLastMultipliers((prev) => [
 			{ mul: multiplierValue, index: Math.floor((xPos - pinSize * 3) / (widthUnit * 2)) },
-			prev[0],
-			prev[1],
-			prev[2],
+			...prev,
 		]);
 		// toast.success(
 		// 	<div style={{ color: "black", fontSize: "14px" }}>

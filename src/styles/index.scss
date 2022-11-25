@@ -67,12 +67,12 @@ body {
     width: -webkit-fill-available;
   }
 
-  @include media-md {}
-
-  @include media-sm {}
-
-  @include media-xs {
+  @include media-md {
     margin-left: 12px;
     margin-right: 12px;
   }
+
+  @include media-sm {}
+
+  @include media-xs {}
 }
