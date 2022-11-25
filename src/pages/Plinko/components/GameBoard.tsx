@@ -34,8 +34,6 @@ const GameBoard = ({
 	}, []);
 
 	useEffect(() => {
-		// for (let i = 0; i < (resultRef.current.innerHTML.match(/<button/g) || []).length; i++)
-		// 	resultRef.current.children[i].style.opacity = "1";
 		setBottom((prev) => prev - 50);
 	}, [multiplierHistory]);
 

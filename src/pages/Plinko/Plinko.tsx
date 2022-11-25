@@ -32,6 +32,8 @@ const Plinko = () => {
 	const { engine: engineConfig, world: worldConfig, maxBallsCount } = config;
 	const worldWidth: number = worldConfig.width;
 	const worldHeight: number = worldConfig.height;
+	const balance = useGameStore((state) => state.balance);
+	const incrementBalance = useGameStore((state) => state.incrementBalance);
 
 	const alertUser = (e: BeforeUnloadEvent) => {
 		if (inGameBallsCount > 0) {
@@ -205,6 +207,7 @@ const Plinko = () => {
 		// 	prev[1],
 		// 	prev[2],
 		// ]);
+		incrementBalance(+ballValue * multiplierValue);
 		setLastMultipliers((prev) => [
 			{ mul: multiplierValue, index: Math.floor((xPos - pinSize * 3) / (widthUnit * 2)) },
 			...prev,

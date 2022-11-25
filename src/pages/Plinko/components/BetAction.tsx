@@ -1,5 +1,6 @@
 import { ChangeEvent, useRef, useState } from "react";
 import { toast } from "react-toastify";
+import { useGameStore } from "store/game";
 import { LinesType } from "../@types";
 import { maxBallsCount } from "../config";
 
@@ -18,13 +19,15 @@ const BetAction = ({
 	onChangeRisk,
 	inGameBallsCount,
 }: PlinkoBetActions) => {
+	let balanceState = useGameStore((state) => state.balance);
+	const balance = useGameStore((state) => state.balance);
 	const isLoading = false;
 	const currentBalance = 100000;
 	const isAuth = true;
 	const [betValue, setBetValue] = useState<number>(1);
 	const [isAuto, setIsAuto] = useState(false);
 	const [autoBallCount, setAutoBallCount] = useState<number>(1);
-
+	const incrementBalance = useGameStore((state) => state.incrementBalance);
 	const [curId, setCurId] = useState<number>(0);
 	const curIdRef = useRef<any>(null);
 
@@ -84,13 +87,20 @@ const BetAction = ({
 		if (!isAuth || isLoading) return;
 		if (betValue <= 0 || betValue === ("" as any)) {
 			toast.error(
-				<div style={{ color: "red", fontSize: "18px", }}>Must place a bet above $0!</div>
+				<div style={{ color: "red", fontSize: "18px" }}>Must place a bet above $0!</div>
 			);
 			return;
 		}
 		if (inGameBallsCount >= maxBallsCount) return;
 
 		if (!isAuto) {
+			if (betValue > balance) {
+				toast.error(
+					<div style={{ color: "red", fontSize: "18px" }}>Not Enough Fund!</div>
+				);
+				return;
+			}
+			incrementBalance(-betValue);
 			onRunBet(betValue);
 			return;
 		}
@@ -104,9 +114,18 @@ const BetAction = ({
 				clearInterval(timerId);
 				timerId = null;
 			} else {
-				if (betValue > currentBalance) {
-					setBetValue(currentBalance);
+				console.log(betValue, balance);
+				if (betValue > balanceState) {
+					toast.error(
+						<div style={{ color: "red", fontSize: "18px" }}>Not Enough Fund!</div>
+					);
+					setCurId(0);
+					clearInterval(timerId);
+					timerId = null;
+					return;
 				}
+				balanceState -= betValue;
+				incrementBalance(-betValue);
 				onRunBet(betValue);
 				setCurId((prev) => prev + 1);
 			}
