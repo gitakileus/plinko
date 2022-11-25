@@ -1,5 +1,3 @@
-import { colors } from "styles/colors";
-
 const pins = {
 	startPins: 3,
 	pinSize: 3,
@@ -11,12 +9,12 @@ const ball = {
 };
 
 const engine = {
-	engineGravity: 2.5,
+	engineGravity: 2,
 };
 
 const world = {
-	width: 750,
-	height: 750,
+	width: 600,
+	height: 600,
 };
 
 export const maxBallsCount = 100;
@@ -26,7 +24,6 @@ export const config = {
 	ball,
 	engine,
 	world,
-	colors,
 	maxBallsCount,
 };
 
@@ -49,13 +46,49 @@ export const multiplier = {
 };
 
 export const color = [
-	"#da2034",
-	"#ea3347",
-	"#ea3a41",
-	"#eb463c",
-	"#eb5739",
-	"#ed6b37",
-	"#f0963c",
-	"#f3ac3e",
-	"#f5c342",
+	[
+		{ bg: "#ff003f", shadow: "#a60004" },
+		{ bg: "#ff302f", shadow: "#a60000" },
+		{ bg: "#ff6020", shadow: "#a80100" },
+		{ bg: "#ff9010", shadow: "#aa4b00" },
+		{ bg: "#ffc000", shadow: "#ab7900" },
+		{ bg: "#ff9010", shadow: "#aa4b00" },
+		{ bg: "#ff6020", shadow: "#a80100" },
+		{ bg: "#ff302f", shadow: "#a60000" },
+		{ bg: "#ff003f", shadow: "#a60004" },
+	],
+	[
+		{ bg: "#ff003f", shadow: "#a60004" },
+		{ bg: "#ff2035", shadow: "#a60000" },
+		{ bg: "#ff402a", shadow: "#a60000" },
+		{ bg: "#ff6020", shadow: "#a80100" },
+		{ bg: "#ff8015", shadow: "#a93a00" },
+		{ bg: "#ffa00b", shadow: "#aa5b00" },
+		{ bg: "#ffc000", shadow: "#ab7900" },
+		{ bg: "#ffa00b", shadow: "#aa5b00" },
+		{ bg: "#ff8015", shadow: "#a93a00" },
+		{ bg: "#ff6020", shadow: "#a80100" },
+		{ bg: "#ff402a", shadow: "#a60000" },
+		{ bg: "#ff2035", shadow: "#a60000" },
+		{ bg: "#ff003f", shadow: "#a60004" },
+	],
+	[
+		{ bg: "#ff003f", shadow: "#a60004" },
+		{ bg: "#ff1837", shadow: "#a60000" },
+		{ bg: "#ff302f", shadow: "#a60000" },
+		{ bg: "#ff4827", shadow: "#a70000" },
+		{ bg: "#ff6020", shadow: "#a80100" },
+		{ bg: "#ff7818", shadow: "#a93000" },
+		{ bg: "#ff9010", shadow: "#aa4b00" },
+		{ bg: "#ffa808", shadow: "#aa6300" },
+		{ bg: "#ffc000", shadow: "#ab7900" },
+		{ bg: "#ffa808", shadow: "#aa6300" },
+		{ bg: "#ff9010", shadow: "#aa4b00" },
+		{ bg: "#ff7818", shadow: "#a93000" },
+		{ bg: "#ff6020", shadow: "#a80100" },
+		{ bg: "#ff4827", shadow: "#a70000" },
+		{ bg: "#ff302f", shadow: "#a60000" },
+		{ bg: "#ff1837", shadow: "#a60000" },
+		{ bg: "#ff003f", shadow: "#a60004" },
+	],
 ];

@@ -5,66 +5,73 @@
   justify-content: center;
 
   .plinko-container {
-    padding-top: 24px;
-    padding-bottom: 24px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    max-width: 1200px;
+
+    * {
+      font-size: 14px;
+      font-weight: 600;
+    }
 
     .game-box {
       display: flex;
       overflow: hidden;
-      border: 1px solid #4A5568;
-      border-radius: 4px;
-      height: 100%;
-      min-height: 740px;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      border-bottom: 3px solid var(--background);
+      background: var(--primary);
 
-      @include media-md {
-        flex-direction: column-reverse;
-        align-items: center;
-        gap: 32px;
-        margin-left: auto;
-        margin-right: auto;
-        max-width: 600px;
-        height: auto;
-        min-height: 0px;
-        border: none;
+      // @include media-md {
+      //   flex-direction: column-reverse;
+      //   align-items: center;
+      //   gap: 32px;
+      //   margin-left: auto;
+      //   margin-right: auto;
+      //   max-width: 600px;
+      //   height: auto;
+      //   min-height: 0px;
+      //   border: none;
 
-        .send-ball {
-          order: -1;
-        }
-      }
+      //   .send-ball {
+      //     order: -1;
+      //   }
+      // }
 
 
       .bet-action {
         display: flex;
         flex-direction: column;
-        row-gap: 24px;
-        margin: 1px;
-        border: 1px solid #2D3748;
-        border-radius: 4px;
-        width: 280px;
-        padding: 16px;
-        background-color: #1C242C;
+        row-gap: 12px;
+        width: 300px;
+        padding: 12px;
+        background-color: var(--background);
 
-        @include media-md {
-          width: 100%;
-          height: fit-content;
-          row-gap: 12px;
-        }
+        // @include media-md {
+        //   width: 100%;
+        //   height: fit-content;
+        // }
 
         .game-type {
           display: grid;
           grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 8px;
-          border-radius: 4px;
-          padding: 8px;
-          background-color: var(--theme);
+          gap: 5px;
+          border-radius: 9999px;
+          padding: 5px;
+          background-color: var(--primary);
 
           button {
+            border-radius: 9999px;
             border: none;
-            padding: 8px;
+            padding: 7px;
             background-color: transparent;
 
             &.active {
-              background-color: var(--primary);
+              background-color: #2f4553;
+            }
+
+            &:hover {
+              background-color: #2f4553;
             }
           }
         }
@@ -73,20 +80,21 @@
           .input-box {
             display: flex;
             align-items: center;
-            padding: 4px;
+            border-radius: 8px;
+            border: 2px solid #2f4553;
+            padding: 5px;
+            background-color: var(--primary);
 
             span {
-              margin-left: 8px;
-              margin-right: auto;
+              margin-right: 4px;
             }
 
             input {
               border: none;
               outline: none;
-              margin-left: 8px;
               margin-right: 8px;
               width: 100%;
-              background-color: transparent;
+              background-color: var(--primary);
               text-align: right;
             }
 
@@ -98,9 +106,13 @@
               button {
                 border: none;
                 padding: 8px;
-                background-color: #1c242c;
+                background-color: #2f4553;
                 font-size: 12px;
               }
+            }
+
+            &:hover {
+              border-color: #557086;
             }
           }
         }
@@ -108,24 +120,36 @@
         .risk,
         .rows {
           div {
+            border: 2px solid #2f4553;
+            border-radius: 8px;
+            background-color: var(--primary);
+
             select {
               border: none;
               outline: none;
               margin: 8px;
-              background-color: transparent;
               width: -webkit-fill-available;
+              background-color: transparent;
+            }
+
+            &:hover {
+              border-color: #557086;
             }
           }
         }
 
         .number-of-bets {
           div {
+            border: 2px solid #2f4553;
+            border-radius: 8px;
+            background: var(--primary);
+
             input {
               margin: 8px;
               border: none;
               outline: none;
-              background: transparent;
               width: -webkit-fill-available;
+              background-color: transparent;
               text-align: right;
 
               &::-webkit-outer-spin-button,
@@ -134,35 +158,38 @@
                 margin: 0;
               }
             }
-          }
-        }
 
-        .highlight-hover {
-          border: 2px solid #2D3748;
-          border-radius: 4px;
-          background-color: var(--theme);
-
-          &:hover {
-            border-color: #5A6578;
+            &:hover {
+              border-color: #557086;
+            }
           }
         }
 
         .send-ball {
+          height: 60px;
           border: none;
-          padding: 12px;
           background-color: var(--secondary);
           font-size: 16px;
           font-weight: 700;
+          color: var(--primary);
+
+          &:hover {
+            background-color: #1fff20;
+          }
+
+          &:active {
+            height: 54px;
+          }
         }
       }
 
       .game-board {
+        position: relative;
         display: flex;
         flex: 1;
         justify-content: center;
         align-items: center;
         overflow: hidden;
-        background-color: #1a2c38;
 
         #plinko {
           position: relative;
@@ -170,33 +197,56 @@
 
         .multiplier-box {
           display: flex;
-          margin-top: -5px;
-          margin-bottom: 20px;
-
-          @media (max-width: 600px) {
-            margin-bottom: -40px;
-          }
-
-          @include media-xs {
-            margin-bottom: -70px;
-          }
 
           div {
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             flex-grow: 1;
             box-shadow: 0 4px;
-            border-radius: 4px;
+            margin-bottom: 36px;
+            border-radius: 5px;
             width: -webkit-fill-available;
-            padding-top: 4px;
-            padding-bottom: 2px;
+            height: 28px;
+            font-size: 12px;
+            line-height: 0px;
+            font-weight: bold;
             text-align: center;
-            color: white;
-            transition: all .2s ease-in-out;
+            color: #000c;
 
             &.highlighted {
               animation-name: bounce;
-              animation-duration: 200ms;
+              animation-duration: 300ms;
+              animation-timing-function: cubic-bezier(.18, .89, .32, 1.28);
             }
+
+            @include media-md {
+              margin-bottom: 20px;
+            }
+          }
+        }
+
+        .multiplier-history {
+          position: absolute;
+          top: 50%;
+          right: 5%;
+          transform: translateY(-50%);
+          display: flex;
+          flex-direction: column;
+          height: 200px;
+          overflow-y: hidden;
+          border-radius: 12px;
+
+          button {
+            margin-bottom: 1px;
+            border: none;
+            border-radius: 0px;
+            outline: none;
+            width: 50px;
+            height: 50px;
+            font-weight: 700;
+            color: #000c;
           }
         }
       }

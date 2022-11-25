@@ -7,9 +7,16 @@ type Props = {
 	risk: "Low" | "Mid" | "High";
 	pinSize: number;
 	activeBlock: number;
+	multiplierHistory: Record<any, any>[];
 };
 
-const GameBoard = ({ lines, risk = "Low", pinSize, activeBlock }: Props) => {
+const GameBoard = ({
+	lines,
+	risk = "Low",
+	pinSize,
+	activeBlock,
+	multiplierHistory,
+}: Props) => {
 	const [dimentions, setDimentions] = useState({
 		width: 0,
 		height: 0,
@@ -22,36 +29,19 @@ const GameBoard = ({ lines, risk = "Low", pinSize, activeBlock }: Props) => {
 		handleResize();
 	}, []);
 
-	useEffect(() => {
-		if (dimentions.width >= 1080) {
-			contentRef.current.style.scale = 1;
-			boardRef.current.style.maxHeight = "none";
-			return;
-		}
-		contentRef.current.style.scale = 0.7;
-		console.log(contentRef.current.clientHeight);
-		boardRef.current.style.maxHeight = `${contentRef.current.clientHeight * 0.6}px`;
-		// boardRef.current.style.maxHeight = `${dimentions.width * 0.9}px`;
-		if (dimentions.width < 600) {
-			contentRef.current.style.scale = (dimentions.width - 80) / 750;
-			boardRef.current.style.maxHeight = `${
-				contentRef.current.clientHeight * ((dimentions.width - 80) / 750)
-			}px`;
-		}
-	}, [dimentions]);
+	useEffect(() => {}, [dimentions]);
 	const boardRef = useRef<any>(null);
 	const contentRef = useRef<any>(null);
 
 	return (
 		<div className="game-board" ref={boardRef}>
-			<div
-				className="game-content"
-				ref={contentRef}
-				style={{
-					marginTop: `-${(15 - lines / 2) * 10}px`,
-				}}
-			>
-				<div id="plinko" />
+			<div className="game-content" ref={contentRef}>
+				<div
+					id="plinko"
+					style={{
+						marginTop: `${lines === 8 ? -55 : lines === 12 ? -20 : -5}px`,
+					}}
+				/>
 				<div
 					className="multiplier-box"
 					style={{
@@ -63,19 +53,32 @@ const GameBoard = ({ lines, risk = "Low", pinSize, activeBlock }: Props) => {
 					{multiplier[risk][lines / 4 - 2].map((mul: number, index: number) => (
 						<div
 							style={{
-								background: color[index + 8 - lines / 2] || color[lines / 2 - index + 8],
-								fontSize: `${15 - lines / 4}px`,
-								boxShadow: `0px 3px 0px ${
-									color[index + 8 - lines / 2] || color[lines / 2 - index + 8]
-								}99`,
+								background: color[lines / 4 - 2][index].bg,
+								boxShadow: `0px 3px 0px ${color[lines / 4 - 2][index].shadow}99`,
 							}}
 							key={String(mul) + String(index)}
 							className={activeBlock === index ? "highlighted" : ""}
 						>
-							{mul}x
+							{mul}
+							{mul < 100 ? "x" : ""}
 						</div>
 					))}
 				</div>
+			</div>
+			<div className="multiplier-history">
+				{multiplierHistory.map((multiplier, index) => {
+					if (index > 3 || !multiplier) return null;
+					return (
+						<button
+							key={`${multiplier.mul}${index}${Math.random()}`}
+							style={{
+								backgroundColor: color[lines / 4 - 2][multiplier.index]?.bg,
+							}}
+						>
+							{multiplier.mul}x
+						</button>
+					);
+				})}
 			</div>
 		</div>
 	);
