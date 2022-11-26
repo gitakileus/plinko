@@ -1,18 +1,18 @@
-import { useState, useEffect, useRef } from "react";
-import { LinesType } from "../@types";
-import { multiplier, color } from "../config";
+import { useState, useEffect, useRef } from 'react'
+import { LinesType } from '../@types'
+import { multiplier, color } from '../config'
 
 type Props = {
-	lines: LinesType;
-	risk: "Low" | "Mid" | "High";
-	pinSize: number;
-	activeBlock: number;
-	multiplierHistory: Record<any, any>[];
-};
+	lines: LinesType
+	risk: 'Low' | 'Mid' | 'High'
+	pinSize: number
+	activeBlock: number
+	multiplierHistory: Record<any, any>[]
+}
 
 const GameBoard = ({
 	lines,
-	risk = "Low",
+	risk = 'Low',
 	pinSize,
 	activeBlock,
 	multiplierHistory,
@@ -20,42 +20,42 @@ const GameBoard = ({
 	const [dimentions, setDimentions] = useState({
 		width: 0,
 		height: 0,
-	});
-	const [bottom, setBottom] = useState(250);
-	const boardRef = useRef<any>(null);
-	const contentRef = useRef<any>(null);
-	const resultRef = useRef<any>(null);
+	})
+	const [bottom, setBottom] = useState(250)
+	const boardRef = useRef<any>(null)
+	const contentRef = useRef<any>(null)
+	const resultRef = useRef<any>(null)
 	useEffect(() => {
 		const handleResize = () => {
-			setDimentions({ width: window.innerWidth, height: window.innerHeight });
-		};
-		window.addEventListener("resize", handleResize);
-		handleResize();
-	}, []);
-
-	useEffect(() => {
-		setBottom((prev) => prev - 50);
-	}, [multiplierHistory]);
-
-	useEffect(() => {
-		const width = dimentions.width;
-		if (width >= 1000) {
-			contentRef.current.style.scale = 1;
-			boardRef.current.style.height = "auto";
-			resultRef.current.style.scale = 1;
-			resultRef.current.style.top = "50%";
-		} else if (width < 1000 && width >= 424) {
-			contentRef.current.style.scale = 0.6;
-			boardRef.current.style.height = "380px";
-			resultRef.current.style.scale = 0.6;
-			resultRef.current.style.top = "20%";
-		} else {
-			contentRef.current.style.scale = (width - 24) / 660;
-			boardRef.current.style.height = `${width - 24}px`;
-			resultRef.current.style.scale = 0.6;
-			resultRef.current.style.top = "20%";
+			setDimentions({ width: window.innerWidth, height: window.innerHeight })
 		}
-	}, [dimentions]);
+		window.addEventListener('resize', handleResize)
+		handleResize()
+	}, [])
+
+	useEffect(() => {
+		setBottom((prev) => prev - 50)
+	}, [multiplierHistory])
+
+	useEffect(() => {
+		const width = dimentions.width
+		if (width >= 1000) {
+			contentRef.current.style.scale = 1
+			boardRef.current.style.height = 'auto'
+			resultRef.current.style.scale = 1
+			resultRef.current.style.top = '50%'
+		} else if (width < 1000 && width >= 424) {
+			contentRef.current.style.scale = 0.6
+			boardRef.current.style.height = '380px'
+			resultRef.current.style.scale = 0.6
+			resultRef.current.style.top = '20%'
+		} else {
+			contentRef.current.style.scale = (width - 24) / 660
+			boardRef.current.style.height = `${width - 24}px`
+			resultRef.current.style.scale = 0.6
+			resultRef.current.style.top = '20%'
+		}
+	}, [dimentions])
 
 	return (
 		<div className="game-board" ref={boardRef}>
@@ -81,10 +81,10 @@ const GameBoard = ({
 								boxShadow: `0px 3px 0px ${color[lines / 4 - 2][index].shadow}99`,
 							}}
 							key={String(mul) + String(index)}
-							className={activeBlock === index ? "highlighted" : ""}
+							className={activeBlock === index ? 'highlighted' : ''}
 						>
 							{mul}
-							{mul < 100 ? "x" : ""}
+							{mul < 100 ? 'x' : ''}
 						</div>
 					))}
 				</div>
@@ -102,12 +102,12 @@ const GameBoard = ({
 							>
 								{multiplier.mul}x
 							</button>
-						);
+						)
 					})}
 				</div>
 			</div>
 		</div>
-	);
-};
+	)
+}
 
-export default GameBoard;
+export default GameBoard

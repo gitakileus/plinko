@@ -1,15 +1,15 @@
-import ReactHelmet from "react-helmet";
-import Header from "./Header";
-import Footer from "./Footer";
+import ReactHelmet from 'react-helmet'
+import Header from './Header'
+import Footer from './Footer'
 
 type Props = {
-	title: string;
-	className?: string;
-	children?: React.ReactNode;
-};
+	title: string
+	className?: string
+	children?: React.ReactNode
+}
 
 const MainLayout = (props: Props) => {
-	const { title, className, children } = props;
+	const { title, className, children } = props
 	return (
 		<>
 			<ReactHelmet>
@@ -19,7 +19,7 @@ const MainLayout = (props: Props) => {
 			<main className={className}>{children}</main>
 			<Footer />
 		</>
-	);
-};
+	)
+}
 
-export default MainLayout;
+export default MainLayout

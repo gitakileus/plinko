@@ -1,3 +1,3 @@
-declare module "react-helmet";
-declare module "*.wav";
-declare module "*.png";
+declare module 'react-helmet'
+declare module '*.wav'
+declare module '*.png'

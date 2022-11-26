@@ -1,31 +1,19 @@
-const pins = {
-	startPins: 3,
-	pinSize: 3,
-	pinGap: 20,
-};
-
-const ball = {
-	ballSize: 5,
-};
-
 const engine = {
 	engineGravity: 2,
-};
+}
 
 const world = {
 	width: 600,
 	height: 600,
-};
+}
 
-export const maxBallsCount = 100;
+export const maxBallsCount = 100
 
 export const config = {
-	pins,
-	ball,
 	engine,
 	world,
 	maxBallsCount,
-};
+}
 
 export const multiplier = {
 	Low: [
@@ -43,52 +31,52 @@ export const multiplier = {
 		[170, 24, 8.1, 2, 0.7, 0.2, 0.2, 0.2, 0.7, 1.2, 8, 24, 170],
 		[1000, 130, 26, 9, 4, 2, 0.2, 0.2, 0.2, 0.2, 0.2, 2, 4, 9, 26, 130, 1000],
 	],
-};
+}
 
 export const color = [
 	[
-		{ bg: "#ff003f", shadow: "#a60004" },
-		{ bg: "#ff302f", shadow: "#a60000" },
-		{ bg: "#ff6020", shadow: "#a80100" },
-		{ bg: "#ff9010", shadow: "#aa4b00" },
-		{ bg: "#ffc000", shadow: "#ab7900" },
-		{ bg: "#ff9010", shadow: "#aa4b00" },
-		{ bg: "#ff6020", shadow: "#a80100" },
-		{ bg: "#ff302f", shadow: "#a60000" },
-		{ bg: "#ff003f", shadow: "#a60004" },
+		{ bg: '#ff003f', shadow: '#a60004' },
+		{ bg: '#ff302f', shadow: '#a60000' },
+		{ bg: '#ff6020', shadow: '#a80100' },
+		{ bg: '#ff9010', shadow: '#aa4b00' },
+		{ bg: '#ffc000', shadow: '#ab7900' },
+		{ bg: '#ff9010', shadow: '#aa4b00' },
+		{ bg: '#ff6020', shadow: '#a80100' },
+		{ bg: '#ff302f', shadow: '#a60000' },
+		{ bg: '#ff003f', shadow: '#a60004' },
 	],
 	[
-		{ bg: "#ff003f", shadow: "#a60004" },
-		{ bg: "#ff2035", shadow: "#a60000" },
-		{ bg: "#ff402a", shadow: "#a60000" },
-		{ bg: "#ff6020", shadow: "#a80100" },
-		{ bg: "#ff8015", shadow: "#a93a00" },
-		{ bg: "#ffa00b", shadow: "#aa5b00" },
-		{ bg: "#ffc000", shadow: "#ab7900" },
-		{ bg: "#ffa00b", shadow: "#aa5b00" },
-		{ bg: "#ff8015", shadow: "#a93a00" },
-		{ bg: "#ff6020", shadow: "#a80100" },
-		{ bg: "#ff402a", shadow: "#a60000" },
-		{ bg: "#ff2035", shadow: "#a60000" },
-		{ bg: "#ff003f", shadow: "#a60004" },
+		{ bg: '#ff003f', shadow: '#a60004' },
+		{ bg: '#ff2035', shadow: '#a60000' },
+		{ bg: '#ff402a', shadow: '#a60000' },
+		{ bg: '#ff6020', shadow: '#a80100' },
+		{ bg: '#ff8015', shadow: '#a93a00' },
+		{ bg: '#ffa00b', shadow: '#aa5b00' },
+		{ bg: '#ffc000', shadow: '#ab7900' },
+		{ bg: '#ffa00b', shadow: '#aa5b00' },
+		{ bg: '#ff8015', shadow: '#a93a00' },
+		{ bg: '#ff6020', shadow: '#a80100' },
+		{ bg: '#ff402a', shadow: '#a60000' },
+		{ bg: '#ff2035', shadow: '#a60000' },
+		{ bg: '#ff003f', shadow: '#a60004' },
 	],
 	[
-		{ bg: "#ff003f", shadow: "#a60004" },
-		{ bg: "#ff1837", shadow: "#a60000" },
-		{ bg: "#ff302f", shadow: "#a60000" },
-		{ bg: "#ff4827", shadow: "#a70000" },
-		{ bg: "#ff6020", shadow: "#a80100" },
-		{ bg: "#ff7818", shadow: "#a93000" },
-		{ bg: "#ff9010", shadow: "#aa4b00" },
-		{ bg: "#ffa808", shadow: "#aa6300" },
-		{ bg: "#ffc000", shadow: "#ab7900" },
-		{ bg: "#ffa808", shadow: "#aa6300" },
-		{ bg: "#ff9010", shadow: "#aa4b00" },
-		{ bg: "#ff7818", shadow: "#a93000" },
-		{ bg: "#ff6020", shadow: "#a80100" },
-		{ bg: "#ff4827", shadow: "#a70000" },
-		{ bg: "#ff302f", shadow: "#a60000" },
-		{ bg: "#ff1837", shadow: "#a60000" },
-		{ bg: "#ff003f", shadow: "#a60004" },
+		{ bg: '#ff003f', shadow: '#a60004' },
+		{ bg: '#ff1837', shadow: '#a60000' },
+		{ bg: '#ff302f', shadow: '#a60000' },
+		{ bg: '#ff4827', shadow: '#a70000' },
+		{ bg: '#ff6020', shadow: '#a80100' },
+		{ bg: '#ff7818', shadow: '#a93000' },
+		{ bg: '#ff9010', shadow: '#aa4b00' },
+		{ bg: '#ffa808', shadow: '#aa6300' },
+		{ bg: '#ffc000', shadow: '#ab7900' },
+		{ bg: '#ffa808', shadow: '#aa6300' },
+		{ bg: '#ff9010', shadow: '#aa4b00' },
+		{ bg: '#ff7818', shadow: '#a93000' },
+		{ bg: '#ff6020', shadow: '#a80100' },
+		{ bg: '#ff4827', shadow: '#a70000' },
+		{ bg: '#ff302f', shadow: '#a60000' },
+		{ bg: '#ff1837', shadow: '#a60000' },
+		{ bg: '#ff003f', shadow: '#a60004' },
 	],
-];
+]

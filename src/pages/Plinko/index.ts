@@ -1,1 +1,1 @@
-export { default } from "./Plinko";
+export { default } from './Plinko'
