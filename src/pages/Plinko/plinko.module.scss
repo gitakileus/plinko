@@ -166,7 +166,9 @@
         }
 
         &.disabled {
-          input, select {
+
+          input,
+          select {
             cursor: not-allowed;
           }
         }
