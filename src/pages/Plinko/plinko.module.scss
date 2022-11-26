@@ -164,6 +164,12 @@
             height: 54px;
           }
         }
+
+        &.disabled {
+          input, select {
+            cursor: not-allowed;
+          }
+        }
       }
 
       @media (max-width: 999px) {
@@ -197,6 +203,13 @@
         align-items: center;
         overflow: hidden;
         width: 100%;
+
+        .left-ball-count {
+          position: absolute;
+          z-index: 1;
+          top: 5%;
+          left: 5%;
+        }
 
         #plinko {
           position: relative;

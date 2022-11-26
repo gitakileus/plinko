@@ -7,14 +7,13 @@ header {
   padding-right: 12px;
   background: var(--theme);
 
-  .wallet-adapter-button,
-  .wallet-adapter-dropdown {
-    margin-left: auto;
-  }
 
-  .my-fund {
+  nav {
+    display: flex;
+    gap: 12px;
     margin-left: auto;
-    width: 160px;
-    font-weight: 500;
+
+    .wallet-adapter-button,
+    .wallet-adapter-dropdown {}
   }
 }

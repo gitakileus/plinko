@@ -13,7 +13,7 @@ import {
 } from 'matter-js'
 import { useGameStore } from 'store/game'
 import { random } from 'utils/random'
-import { LinesType } from './@types'
+import { LinesType, RiskType } from './@types'
 import { config, multiplier as multiplierValues } from './config'
 import MainLayout from 'layouts/MainLayout'
 import Panel from './components/BetAction'
@@ -22,18 +22,20 @@ import styles from './plinko.module.scss'
 
 const Plinko = () => {
 	const engine = Engine.create()
+	const [isAuto, setIsAuto] = useState<boolean>(false)
 	const [lines, setLines] = useState<LinesType>(8)
-	const [risk, setRisk] = useState<'Low' | 'Mid' | 'High'>('Low')
+	const [risk, setRisk] = useState<RiskType>('Low')
 	const inGameBallsCount = useGameStore((state) => state.gamesRunning)
 	const [activeBlock, setActiveBlock] = useState(0)
+	const [autoBallCount, setAutoBallCount] = useState<number>(1)
 	const [lastMultipliers, setLastMultipliers] = useState<Record<any, any>[]>([])
 	const incrementInGameBallsCount = useGameStore((state) => state.incrementGamesRunning)
 	const decrementInGameBallsCount = useGameStore((state) => state.decrementGamesRunning)
 	const { engine: engineConfig, world: worldConfig, maxBallsCount } = config
 	const worldWidth: number = worldConfig.width
 	const worldHeight: number = worldConfig.height
-	const balance = useGameStore((state) => state.balance)
 	const incrementBalance = useGameStore((state) => state.incrementBalance)
+	const [leftBallCount, setLeftBallCount] = useState<number>(0)
 
 	const alertUser = (e: BeforeUnloadEvent) => {
 		if (inGameBallsCount > 0) {
@@ -88,9 +90,9 @@ const Plinko = () => {
 	const pins: Body[] = []
 
 	const pinSize = 8 - lines / 4 + (lines === 8 ? 1.2 : 0)
-
 	const widthUnit = (worldWidth - pinSize * 2) / (lines * 2 + 2)
 	const heightUnit = (worldHeight - pinSize * 2) / (lines + 1)
+
 	for (let i = 0; i < lines; i++) {
 		for (let j = lines - i - 1; j <= lines - i + (i + 2) * 2; j += 2) {
 			const pin = Bodies.circle(
@@ -125,7 +127,6 @@ const Plinko = () => {
 			const minBallX = worldWidth / 2 + widthUnit
 			const maxBallX = worldWidth / 2 - widthUnit
 			const ballX = random(minBallX, maxBallX)
-			// const ballColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
 			const ballColor = '#ff9010'
 			const ball = Bodies.circle(ballX, heightUnit, pinSize * 1.8, {
 				restitution: 1,
@@ -145,6 +146,7 @@ const Plinko = () => {
 		},
 		[risk, lines] //eslint-disable-line
 	)
+
 	const leftWall = Bodies.rectangle(
 		worldWidth / 3 - 75,
 		worldWidth / 2 - 2,
@@ -182,6 +184,7 @@ const Plinko = () => {
 	Composite.add(engine.world, [...pins, leftWall, rightWall, floor])
 
 	const bet = (betValue: number) => {
+		setLeftBallCount((prev) => prev - 1)
 		addBall(betValue)
 	}
 
@@ -201,24 +204,11 @@ const Plinko = () => {
 		}, 10)
 		console.log('Risk:', risk, 'lines: ', lines)
 		console.log('betValue:', ballValue, 'multiplier:', multiplierValue)
-		// setLastMultipliers((prev) => [
-		// 	{ mul: multiplierValue, index: Math.floor((xPos - pinSize * 3) / (widthUnit * 2)) },
-		// 	prev[0],
-		// 	prev[1],
-		// 	prev[2],
-		// ]);
 		incrementBalance(+ballValue * multiplierValue)
 		setLastMultipliers((prev) => [
 			{ mul: multiplierValue, index: Math.floor((xPos - pinSize * 3) / (widthUnit * 2)) },
 			...prev,
 		])
-		// toast.success(
-		// 	<div style={{ color: "black", fontSize: "14px" }}>
-		// 		You earned ${((ballValue as any) * multiplierValue).toFixed(3)}
-		// 	</div>
-		// );
-
-		if (+ballValue <= 0) return
 	}
 
 	const onBodyCollision = async (event: IEventCollision<Engine>) => {
@@ -272,6 +262,12 @@ const Plinko = () => {
 						onChangeLines={setLines}
 						onRunBet={bet}
 						onChangeRisk={setRisk}
+						autoBallCount={autoBallCount}
+						onChangeAutoBallCount={setAutoBallCount}
+						isAuto={isAuto}
+						onChangeIsAuto={setIsAuto}
+						leftBallCount={leftBallCount}
+						onChangeLeftBallCount={setLeftBallCount}
 					/>
 					<GameBoard
 						lines={lines}
@@ -279,6 +275,8 @@ const Plinko = () => {
 						pinSize={pinSize}
 						activeBlock={activeBlock}
 						multiplierHistory={lastMultipliers}
+						leftBallCount={leftBallCount}
+						isAuto={isAuto}
 					/>
 				</div>
 			</div>

@@ -8,6 +8,8 @@ type Props = {
 	pinSize: number
 	activeBlock: number
 	multiplierHistory: Record<any, any>[]
+	leftBallCount: number
+	isAuto: boolean
 }
 
 const GameBoard = ({
@@ -16,6 +18,8 @@ const GameBoard = ({
 	pinSize,
 	activeBlock,
 	multiplierHistory,
+	leftBallCount,
+	isAuto,
 }: Props) => {
 	const [dimentions, setDimentions] = useState({
 		width: 0,
@@ -59,6 +63,9 @@ const GameBoard = ({
 
 	return (
 		<div className="game-board" ref={boardRef}>
+			{isAuto && leftBallCount !== 0 && (
+				<span className="left-ball-count">Balls Left: {leftBallCount}</span>
+			)}
 			<div className="game-content" ref={contentRef}>
 				<div
 					id="plinko"
@@ -78,7 +85,7 @@ const GameBoard = ({
 						<div
 							style={{
 								background: color[lines / 4 - 2][index].bg,
-								boxShadow: `0px 3px 0px ${color[lines / 4 - 2][index].shadow}99`,
+								boxShadow: `0px 3px 0px ${color[lines / 4 - 2][index].shadow}`,
 							}}
 							key={String(mul) + String(index)}
 							className={activeBlock === index ? 'highlighted' : ''}

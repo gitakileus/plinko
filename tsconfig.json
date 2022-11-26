@@ -23,11 +23,8 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
-      "@sounds/*": [
-        "assets/sounds/*"
-      ],
-      "@images/*": [
-        "assets/img/*"
+      "@icons/*": [
+        "assets/icons/*"
       ]
     },
   },

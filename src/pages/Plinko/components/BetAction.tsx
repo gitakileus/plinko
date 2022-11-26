@@ -9,6 +9,12 @@ type PlinkoBetActions = {
 	onChangeLines: (lines: LinesType) => void
 	onChangeRisk: (risk: 'Low' | 'Mid' | 'High') => void
 	inGameBallsCount: number
+	autoBallCount: number
+	onChangeAutoBallCount: (ballCount: number) => void
+	isAuto: boolean
+	onChangeIsAuto: (isAuto: boolean) => void
+	leftBallCount: number
+	onChangeLeftBallCount: (ballCount: number) => void
 }
 
 let timerId: any = null
@@ -18,15 +24,18 @@ const BetAction = ({
 	onChangeLines,
 	onChangeRisk,
 	inGameBallsCount,
+	autoBallCount,
+	onChangeAutoBallCount,
+	isAuto,
+	onChangeIsAuto,
+	leftBallCount,
+	onChangeLeftBallCount,
 }: PlinkoBetActions) => {
 	let balanceState = useGameStore((state) => state.balance)
 	const balance = useGameStore((state) => state.balance)
 	const isLoading = false
-	const currentBalance = 100000
 	const isAuth = true
 	const [betValue, setBetValue] = useState<number>(1)
-	const [isAuto, setIsAuto] = useState(false)
-	const [autoBallCount, setAutoBallCount] = useState<number>(1)
 	const incrementBalance = useGameStore((state) => state.incrementBalance)
 	const [curId, setCurId] = useState<number>(0)
 	const curIdRef = useRef<any>(null)
@@ -67,19 +76,18 @@ const BetAction = ({
 	const handleDoubleBet = () => {
 		if (!isAuth || isLoading) return
 		const value = betValue * 2
-		const newBetvalue =
-			isNaN(value) || value > currentBalance ? 0 : Number(value.toFixed(4))
+		const newBetvalue = isNaN(value) || value > balance ? 0 : Number(value.toFixed(4))
 		setBetValue(newBetvalue)
 	}
 
 	const handleMaxBet = () => {
 		if (!isAuth || isLoading) return
-		setBetValue(currentBalance)
+		setBetValue(+balance.toFixed(2))
 	}
 
 	const handleAutoBallCountChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const value = parseInt(e.target.value)
-		setAutoBallCount(Number(value))
+		onChangeAutoBallCount(Number(value))
 	}
 
 	const handleRunBet = async () => {
@@ -106,7 +114,8 @@ const BetAction = ({
 		}
 
 		const count = !isAuto ? 1 : isNaN(autoBallCount) ? 1 : autoBallCount
-		setAutoBallCount(count)
+		onChangeAutoBallCount(count)
+		onChangeLeftBallCount(count)
 
 		timerId = setInterval(() => {
 			if (curIdRef.current === count) {
@@ -114,7 +123,6 @@ const BetAction = ({
 				clearInterval(timerId)
 				timerId = null
 			} else {
-				console.log(betValue, balance)
 				if (betValue > balanceState) {
 					toast.error(
 						<div style={{ color: 'red', fontSize: '18px' }}>Not Enough Fund!</div>
@@ -122,6 +130,7 @@ const BetAction = ({
 					setCurId(0)
 					clearInterval(timerId)
 					timerId = null
+					onChangeLeftBallCount(0)
 					return
 				}
 				balanceState -= betValue
@@ -133,12 +142,20 @@ const BetAction = ({
 	}
 
 	return (
-		<div className="bet-action">
+		<div className={`bet-action ${inGameBallsCount > 0 ? 'disabled' : ''}`}>
 			<div className="game-type">
-				<button className={!isAuto ? 'active' : ''} onClick={() => setIsAuto(false)}>
+				<button
+					className={!isAuto ? 'active' : ''}
+					onClick={() => onChangeIsAuto(false)}
+					disabled={inGameBallsCount > 0}
+				>
 					Manual
 				</button>
-				<button className={isAuto ? 'active' : ''} onClick={() => setIsAuto(true)}>
+				<button
+					className={isAuto ? 'active' : ''}
+					onClick={() => onChangeIsAuto(true)}
+					disabled={inGameBallsCount > 0}
+				>
 					Auto
 				</button>
 			</div>
@@ -146,11 +163,22 @@ const BetAction = ({
 				<span>Bet amount</span>
 				<div className="input-box highlight-hover">
 					<span>$</span>
-					<input type="text" onChange={handleChangeBetValue} value={betValue} />
+					<input
+						type="text"
+						onChange={handleChangeBetValue}
+						value={betValue}
+						disabled={inGameBallsCount > 0}
+					/>
 					<div>
-						<button onClick={handleHalfBet}>x1/2</button>
-						<button onClick={handleDoubleBet}>x2</button>
-						<button onClick={handleMaxBet}>Max</button>
+						<button onClick={handleHalfBet} disabled={inGameBallsCount > 0}>
+							x1/2
+						</button>
+						<button onClick={handleDoubleBet} disabled={inGameBallsCount > 0}>
+							x2
+						</button>
+						<button onClick={handleMaxBet} disabled={inGameBallsCount > 0}>
+							Max
+						</button>
 					</div>
 				</div>
 			</div>
@@ -158,9 +186,9 @@ const BetAction = ({
 				<span>Risk</span>
 				<div className="highlight-hover">
 					<select
-						disabled={inGameBallsCount > 0}
 						onChange={handleChangeRisk}
 						defaultValue="Low"
+						disabled={inGameBallsCount > 0}
 					>
 						{riskOptions.map((risk) => (
 							<option key={risk} value={risk} style={{ color: 'black' }}>
@@ -174,9 +202,9 @@ const BetAction = ({
 				<span>Rows</span>
 				<div className="highlight-hover">
 					<select
-						disabled={inGameBallsCount > 0}
 						onChange={handleChangeLines}
 						defaultValue={8}
+						disabled={inGameBallsCount > 0}
 					>
 						{linesOptions.map((line, index) => (
 							<option key={line} value={line} style={{ color: 'black' }}>
@@ -194,6 +222,7 @@ const BetAction = ({
 							type="number"
 							value={autoBallCount}
 							onChange={handleAutoBallCountChange}
+							disabled={inGameBallsCount > 0}
 						/>
 					</div>
 				</div>
