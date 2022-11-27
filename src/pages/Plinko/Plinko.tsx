@@ -11,6 +11,7 @@ import {
 	Runner,
 	World,
 } from 'matter-js'
+import axios from 'axios'
 import { useGameStore } from 'store/game'
 import { random } from 'utils/random'
 import { LinesType, RiskType } from './@types'
@@ -127,11 +128,12 @@ const Plinko = () => {
 			const minBallX = worldWidth / 2 + widthUnit
 			const maxBallX = worldWidth / 2 - widthUnit
 			const ballX = random(minBallX, maxBallX)
+			// const ballX = 311.3712
 			const ballColor = '#ff9010'
 			const ball = Bodies.circle(ballX, heightUnit, pinSize * 1.8, {
 				restitution: 1,
 				friction: 0.6,
-				label: `ball-${ballValue}`,
+				label: `ball-${ballValue}-${ballX}`,
 				id: new Date().getTime(),
 				frictionAir: 0.05,
 				collisionFilter: {
@@ -173,7 +175,7 @@ const Plinko = () => {
 			isStatic: true,
 		}
 	)
-	const floor = Bodies.rectangle(0, worldWidth + 1, worldWidth * 10, 3, {
+	const floor = Bodies.rectangle(0, worldWidth + 1, worldWidth * 10, 30, {
 		label: 'block-1',
 		render: {
 			visible: false,
@@ -193,22 +195,23 @@ const Plinko = () => {
 		World.remove(engine.world, ball)
 		removeInGameBall()
 		const ballValue = ball.label.split('-')[1]
+		const startPos = ball.label.split('-')[2]
 		const xPos = ball.position.x
-		const multiplierValue =
-			multiplierValues[risk][lines / 4 - 2][
-				Math.floor((xPos - pinSize * 3) / (widthUnit * 2))
-			]
+		const target = Math.floor((xPos - pinSize) / (widthUnit * 2))
+		const multiplierValue = multiplierValues[risk][lines / 4 - 2][target]
 		setActiveBlock(-1)
 		setTimeout(() => {
-			setActiveBlock(Math.floor((xPos - pinSize * 3) / (widthUnit * 2)))
+			setActiveBlock(target)
 		}, 10)
 		console.log('Risk:', risk, 'lines: ', lines)
 		console.log('betValue:', ballValue, 'multiplier:', multiplierValue)
 		incrementBalance(+ballValue * multiplierValue)
-		setLastMultipliers((prev) => [
-			{ mul: multiplierValue, index: Math.floor((xPos - pinSize * 3) / (widthUnit * 2)) },
-			...prev,
-		])
+		setLastMultipliers((prev) => [{ mul: multiplierValue, index: target }, ...prev])
+		// await axios.post('http://localhost:8080/makeArray', {
+		// 	line: lines,
+		// 	xpos: startPos,
+		// 	target: target,
+		// })
 	}
 
 	const onBodyCollision = async (event: IEventCollision<Engine>) => {
