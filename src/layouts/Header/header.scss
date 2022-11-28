@@ -1,11 +1,16 @@
 header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   box-shadow: 0 1px 1px 0 #0005;
   height: 72px;
   padding-left: 12px;
   padding-right: 12px;
   background: var(--background);
+
+  img {
+    width: 48px;
+  }
 
 
   nav {

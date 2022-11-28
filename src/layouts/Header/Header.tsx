@@ -7,7 +7,7 @@ const Header = () => {
 	const balance = useGameStore((state) => state.balance)
 	return (
 		<header>
-			{/* <div className="my-fund">Balance: ${balance.toFixed(2)}</div> */}
+			<img src="/images/logo.png" alt="" className='logo' />
 			<nav>
 				<Balance balance={balance} />
 				<WalletMultiButton />
