@@ -1,283 +1,283 @@
 @import 'styles/mixin/media';
 
 .plinko :global {
-  display: flex;
-  justify-content: center;
+	display: flex;
+	justify-content: center;
 
-  * {
-    font-size: 14px;
-    font-weight: 600;
-  }
+	* {
+		font-size: 14px;
+		font-weight: 600;
+	}
 
-  .plinko-container {
-    padding-top: 40px;
-    padding-bottom: 40px;
-    max-width: 1200px;
+	.plinko-container {
+		padding-top: 40px;
+		padding-bottom: 40px;
+		max-width: 1200px;
 
-    @media (max-width: 999px) {
-      padding-top: 24px;
-      padding-bottom: 24px;
-      max-width: 400px;
-    }
+		@media (max-width: 999px) {
+			padding-top: 24px;
+			padding-bottom: 24px;
+			max-width: 400px;
+		}
 
-    .game-box {
-      display: flex;
-      overflow: hidden;
-      border-top-left-radius: 8px;
-      border-top-right-radius: 8px;
-      border-bottom: 3px solid var(--background);
-      background: var(--primary);
+		.game-box {
+			display: flex;
+			overflow: hidden;
+			border-top-left-radius: 8px;
+			border-top-right-radius: 8px;
+			border-bottom: 3px solid var(--background);
+			background: var(--primary);
 
-      .bet-action {
-        display: flex;
-        flex-direction: column;
-        row-gap: 12px;
-        min-width: 300px;
-        padding: 12px;
-        background-color: var(--background);
+			.bet-action {
+				display: flex;
+				flex-direction: column;
+				row-gap: 12px;
+				min-width: 300px;
+				padding: 12px;
+				background-color: var(--background);
 
-        .game-type {
-          display: grid;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 5px;
-          border-radius: 9999px;
-          padding: 5px;
-          background-color: var(--primary);
+				.game-type {
+					display: grid;
+					grid-template-columns: repeat(2, minmax(0, 1fr));
+					gap: 5px;
+					border-radius: 9999px;
+					padding: 5px;
+					background-color: var(--primary);
 
-          button {
-            border-radius: 9999px;
-            border: none;
-            padding: 7px;
-            background-color: transparent;
+					button {
+						border-radius: 9999px;
+						border: none;
+						padding: 7px;
+						background-color: transparent;
 
-            &.active {
-              background-color: #2f4553;
-            }
+						&.active {
+							background-color: #2f4553;
+						}
 
-            &:hover {
-              background-color: #2f4553;
-            }
-          }
-        }
+						&:hover {
+							background-color: #2f4553;
+						}
+					}
+				}
 
-        .bet-amount {
-          .input-box {
-            display: flex;
-            align-items: center;
-            border-radius: 8px;
-            border: 2px solid #2f4553;
-            padding: 5px;
-            background-color: var(--primary);
+				.bet-amount {
+					.input-box {
+						display: flex;
+						align-items: center;
+						border-radius: 8px;
+						border: 2px solid #2f4553;
+						padding: 5px;
+						background-color: var(--primary);
 
-            span {
-              margin-right: 4px;
-            }
+						span {
+							margin-right: 4px;
+						}
 
-            input {
-              border: none;
-              outline: none;
-              margin-right: 8px;
-              width: 100%;
-              background-color: var(--primary);
-              text-align: right;
-            }
+						input {
+							border: none;
+							outline: none;
+							margin-right: 8px;
+							width: 100%;
+							background-color: var(--primary);
+							text-align: right;
+						}
 
-            div {
-              display: flex;
-              gap: 4px;
-              margin-left: auto;
+						div {
+							display: flex;
+							gap: 4px;
+							margin-left: auto;
 
-              button {
-                border: none;
-                padding: 8px;
-                background-color: #2f4553;
-                font-size: 12px;
-              }
-            }
+							button {
+								border: none;
+								padding: 8px;
+								background-color: #2f4553;
+								font-size: 12px;
+							}
+						}
 
-            &:hover {
-              border-color: #557086;
-            }
-          }
-        }
+						&:hover {
+							border-color: #557086;
+						}
+					}
+				}
 
-        .risk,
-        .rows {
-          div {
-            border: 2px solid #2f4553;
-            border-radius: 8px;
-            background-color: var(--primary);
+				.risk,
+				.rows {
+					div {
+						border: 2px solid #2f4553;
+						border-radius: 8px;
+						background-color: var(--primary);
 
-            select {
-              border: none;
-              outline: none;
-              margin: 8px;
-              width: -webkit-fill-available;
-              background-color: transparent;
-            }
+						select {
+							border: none;
+							outline: none;
+							margin: 8px;
+							width: -webkit-fill-available;
+							background-color: transparent;
+						}
 
-            &:hover {
-              border-color: #557086;
-            }
-          }
-        }
+						&:hover {
+							border-color: #557086;
+						}
+					}
+				}
 
-        .number-of-bets {
-          div {
-            border: 2px solid #2f4553;
-            border-radius: 8px;
-            background: var(--primary);
+				.number-of-bets {
+					div {
+						border: 2px solid #2f4553;
+						border-radius: 8px;
+						background: var(--primary);
 
-            input {
-              margin: 8px;
-              border: none;
-              outline: none;
-              width: -webkit-fill-available;
-              background-color: transparent;
-              text-align: right;
+						input {
+							margin: 8px;
+							border: none;
+							outline: none;
+							width: -webkit-fill-available;
+							background-color: transparent;
+							text-align: right;
 
-              &::-webkit-outer-spin-button,
-              &::-webkit-inner-spin-button {
-                -webkit-appearance: none;
-                margin: 0;
-              }
-            }
+							&::-webkit-outer-spin-button,
+							&::-webkit-inner-spin-button {
+								-webkit-appearance: none;
+								margin: 0;
+							}
+						}
 
-            &:hover {
-              border-color: #557086;
-            }
-          }
-        }
+						&:hover {
+							border-color: #557086;
+						}
+					}
+				}
 
-        .send-ball {
-          height: 60px;
-          border: none;
-          background-color: var(--secondary);
-          font-size: 16px;
-          font-weight: 700;
-          color: var(--primary);
+				.send-ball {
+					height: 60px;
+					border: none;
+					background-color: var(--secondary);
+					font-size: 16px;
+					font-weight: 700;
+					color: var(--primary);
 
-          &:hover {
-            background-color: #1fff20;
-          }
-        }
+					&:hover {
+						background-color: #1fff20;
+					}
+				}
 
-        &.disabled {
+				&.disabled {
+          
+					input,
+					select,
+					.send-ball {
+						cursor: not-allowed;
+					}
+				}
+			}
 
-          input,
-          select,
-          .send-ball {
-            cursor: not-allowed;
-          }
-        }
-      }
+			@media (max-width: 999px) {
+				flex-direction: column-reverse;
+				height: auto;
+				border: none;
 
-      @media (max-width: 999px) {
-        flex-direction: column-reverse;
-        height: auto;
-        border: none;
+				.bet-action {
+					width: auto;
 
-        .bet-action {
-          width: auto;
+					.bet-amount {
+						order: -3;
+					}
 
-          .bet-amount {
-            order: -3;
-          }
+					.send-ball {
+						order: -2;
+					}
 
-          .send-ball {
-            order: -2;
-          }
+					.rows,
+					.risk,
+					.number-of-bets {
+						order: -1;
+					}
+				}
+			}
 
-          .rows,
-          .risk,
-          .number-of-bets {
-            order: -1;
-          }
-        }
-      }
+			.game-board {
+				position: relative;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				overflow: hidden;
+				width: 100%;
 
-      .game-board {
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        width: 100%;
+				.left-ball-count {
+					position: absolute;
+					z-index: 1;
+					top: 5%;
+					left: 5%;
+				}
 
-        .left-ball-count {
-          position: absolute;
-          z-index: 1;
-          top: 5%;
-          left: 5%;
-        }
+				#plinko {
+					position: relative;
+				}
 
-        #plinko {
-          position: relative;
-        }
+				.multiplier-box {
+					display: flex;
 
-        .multiplier-box {
-          display: flex;
+					div {
+						position: relative;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						flex-grow: 1;
+						box-shadow: 0 4px;
+						margin-bottom: 36px;
+						border-radius: 5px;
+						width: -webkit-fill-available;
+						height: 28px;
+						font-size: 12px;
+						line-height: 0px;
+						font-weight: bold;
+						text-align: center;
+						color: #000c;
 
-          div {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-grow: 1;
-            box-shadow: 0 4px;
-            margin-bottom: 36px;
-            border-radius: 5px;
-            width: -webkit-fill-available;
-            height: 28px;
-            font-size: 12px;
-            line-height: 0px;
-            font-weight: bold;
-            text-align: center;
-            color: #000c;
+						&.highlighted {
+							animation-name: bounce;
+							animation-duration: 300ms;
+							animation-timing-function: cubic-bezier(0.18, 0.89, 0.32, 1.28);
+						}
 
-            &.highlighted {
-              animation-name: bounce;
-              animation-duration: 300ms;
-              animation-timing-function: cubic-bezier(.18, .89, .32, 1.28);
-            }
+						@include media-md {
+							margin-bottom: 20px;
+						}
+					}
+				}
 
-            @include media-md {
-              margin-bottom: 20px;
-            }
-          }
-        }
+				.multiplier-history {
+					position: absolute;
+					top: 50%;
+					right: 5%;
+					display: flex;
+					flex-direction: column;
+					transform: translateY(-50%);
+					width: 50px;
+					height: 200px;
+					overflow-y: hidden;
+					border-radius: 12px;
 
-        .multiplier-history {
-          position: absolute;
-          top: 50%;
-          right: 5%;
-          display: flex;
-          flex-direction: column;
-          transform: translateY(-50%);
-          width: 50px;
-          height: 200px;
-          overflow-y: hidden;
-          border-radius: 12px;
+					#multi-container {
+						position: absolute;
+						left: 0;
+						width: 50px;
+						height: auto;
 
-          #multi-container {
-            position: absolute;
-            left: 0;
-            width: 50px;
-            height: auto;
-
-            button {
-              border: none;
-              border-radius: 0px;
-              outline: none;
-              width: 50px;
-              height: 50px;
-              font-weight: 700;
-              color: #000c;
-              transition: all 1s ease-in-out;
-            }
-          }
-        }
-      }
-    }
-  }
+						button {
+							border: none;
+							border-radius: 0px;
+							outline: none;
+							width: 50px;
+							height: 50px;
+							font-weight: 700;
+							color: #000c;
+							transition: all 1s ease-in-out;
+						}
+					}
+				}
+			}
+		}
+	}
 }
