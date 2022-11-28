@@ -5,74 +5,81 @@
 @import './mixin/toast';
 
 @keyframes bounce {
-  0% {
-    transform: translateY(0px);
-  }
+	0% {
+		transform: translateY(0px);
+	}
 
-  25% {
-    transform: translateY(9px);
-  }
+	25% {
+		transform: translateY(9px);
+	}
 
-  50% {
-    transform: translateY(12px);
-  }
+	50% {
+		transform: translateY(12px);
+	}
 
-  100% {
-    transform: translateY(0px);
-  }
+	100% {
+		transform: translateY(0px);
+	}
 }
 
 *,
 ::before,
 ::after {
-  transition: all .2s ease-in-out;
-  margin: 0;
-  box-sizing: border-box;
-  padding: 0;
-  color: white;
+	transition: all 0.2s ease-in-out;
+	margin: 0;
+	box-sizing: border-box;
+	padding: 0;
+	color: white;
+}
+
+a {
+	text-decoration: none;
 }
 
 body {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-family: 'Montserrat', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-family: 'Montserrat', sans-serif;
 }
 
 .App {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  height: 100%;
-  background: var(--theme);
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	height: 100%;
+	background: var(--theme);
 
-  main {
-    flex-grow: 1;
-  }
+	main {
+		flex-grow: 1;
+	}
 
-  footer {
-    margin-top: auto;
-  }
+	footer {
+		margin-top: auto;
+	}
 }
 
 .plinko-container {
-  margin-left: auto;
-  margin-right: auto;
-  width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 1200px;
 
-  @include media-xl {}
+	@include media-xl {
+	}
 
-  @include media-lg {
-    margin-left: 24px;
-    margin-right: 24px;
-    width: -webkit-fill-available;
-  }
+	@include media-lg {
+		margin-left: 24px;
+		margin-right: 24px;
+		width: -webkit-fill-available;
+	}
 
-  @include media-md {
-    margin-left: 12px;
-    margin-right: 12px;
-  }
+	@include media-md {
+		margin-left: 12px;
+		margin-right: 12px;
+	}
 
-  @include media-sm {}
+	@include media-sm {
+	}
 
-  @include media-xs {}
+	@include media-xs {
+	}
 }

@@ -1,16 +1,27 @@
+@import 'styles/mixin/media';
+
 footer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-top: 1px solid var(--primary);
-  height: 40px;
-  background: var(--theme);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-top: 1px solid var(--primary);
+	padding: 12px 0px;
+	background: var(--theme);
 
-  .contact-us {
-    text-align: center;
+	.contact-us {
+		text-align: center;
 
-    u {
-      cursor: pointer;
-    }
-  }
+		a {
+			cursor: pointer;
+			font-weight: 700;
+			color: #512da8;
+		}
+		@include media-sm {
+			display: flex;
+			flex-direction: column;
+		}
+	}
+	@include media-sm {
+		padding: 8px 0;
+	}
 }
