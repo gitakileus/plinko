@@ -3,6 +3,10 @@ import { toast } from 'react-toastify'
 import { useGameStore } from 'store/game'
 import { LinesType } from '../@types'
 import { maxBallsCount } from '../config'
+import { ReactComponent as MuteIcon } from 'assets/icons/mute.svg'
+import { ReactComponent as UnMuteIcon } from 'assets/icons/unmute.svg'
+import Toggle from 'react-toggle'
+import 'react-toggle/style.css'
 
 type PlinkoBetActions = {
 	onRunBet: (betValue: number) => void
@@ -15,6 +19,8 @@ type PlinkoBetActions = {
 	onChangeIsAuto: (isAuto: boolean) => void
 	leftBallCount: number
 	onChangeLeftBallCount: (ballCount: number) => void
+	muted: boolean
+	onChangeMuted: (muted: boolean) => void
 }
 
 let timerId: any = null
@@ -30,6 +36,8 @@ const BetAction = ({
 	onChangeIsAuto,
 	leftBallCount,
 	onChangeLeftBallCount,
+	muted,
+	onChangeMuted,
 }: PlinkoBetActions) => {
 	let balanceState = useGameStore((state) => state.balance)
 	const balance = useGameStore((state) => state.balance)
@@ -239,6 +247,17 @@ const BetAction = ({
 			>
 				Send ball
 			</button>
+			<div className='toggle-button'>
+				<Toggle
+					checked={!muted}
+					onChange={() => onChangeMuted(!muted)}
+					icons={{
+						checked: <UnMuteIcon className="mute-icon" />,
+						unchecked: <MuteIcon className="mute-icon" />,
+					}}
+					className="mute-toggle"
+				/>
+			</div>
 		</div>
 	)
 }

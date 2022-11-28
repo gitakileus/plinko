@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { ToastContainer } from 'react-toastify'
 import {
 	Bodies,
@@ -20,6 +20,11 @@ import MainLayout from 'layouts/MainLayout'
 import Panel from './components/BetAction'
 import GameBoard from './components/GameBoard'
 import styles from './plinko.module.scss'
+import BallAudio from 'assets/sounds/ball.wav'
+import MultiplierLowAudio from 'assets/sounds/multiplier-low.wav'
+import MultiplierRegularAudio from 'assets/sounds/multiplier-regular.wav'
+import MultiplierGoodAudio from 'assets/sounds/multiplier-good.wav'
+import MultiplierBestAudio from 'assets/sounds/multiplier-best.wav'
 
 const Plinko = () => {
 	const engine = Engine.create()
@@ -37,6 +42,9 @@ const Plinko = () => {
 	const worldHeight: number = worldConfig.height
 	const incrementBalance = useGameStore((state) => state.incrementBalance)
 	const [leftBallCount, setLeftBallCount] = useState<number>(0)
+	const [muted, setMuted] = useState<boolean>(false)
+	const muteRef = useRef<any>(null)
+	muteRef.current = muted
 
 	const alertUser = (e: BeforeUnloadEvent) => {
 		if (inGameBallsCount > 0) {
@@ -197,6 +205,22 @@ const Plinko = () => {
 		const startPos = ball.label.split('-')[2]
 		const xPos = ball.position.x
 		const target = Math.floor((xPos - pinSize) / (widthUnit * 2))
+		if (!muteRef.current) {
+			const tempTarget = target > lines / 2 ? lines - target : target
+			let multiplierSound
+			if (tempTarget === 0) {
+				multiplierSound = new Audio(MultiplierBestAudio)
+			} else if (tempTarget === lines / 2 || tempTarget === lines / 2 - 1) {
+				multiplierSound = new Audio(MultiplierLowAudio)
+			} else if (tempTarget > 0 && tempTarget < lines / 4) {
+				multiplierSound = new Audio(MultiplierGoodAudio)
+			} else {
+				multiplierSound = new Audio(MultiplierRegularAudio)
+			}
+			multiplierSound.volume = 0.2
+			multiplierSound.currentTime = 0
+			multiplierSound.play()
+		}
 		const multiplierValue = multiplierValues[risk][lines / 4 - 2][target]
 		setActiveBlock(-1)
 		setTimeout(() => {
@@ -224,6 +248,13 @@ const Plinko = () => {
 	}
 
 	const onBounceCollision = async (event: IEventCollision<Engine>) => {
+		if (!muteRef.current) {
+			const ballSound = new Audio(BallAudio)
+			ballSound.volume = 0.2
+			ballSound.currentTime = 0
+			ballSound.play()
+		}
+
 		const pairs = event.pairs
 		for (const pair of pairs) {
 			const { bodyA, bodyB } = pair
@@ -270,6 +301,8 @@ const Plinko = () => {
 						onChangeIsAuto={setIsAuto}
 						leftBallCount={leftBallCount}
 						onChangeLeftBallCount={setLeftBallCount}
+						muted={muted}
+						onChangeMuted={setMuted}
 					/>
 					<GameBoard
 						lines={lines}

@@ -279,4 +279,25 @@
 			}
 		}
 	}
+
+	.toggle-button {
+		margin: auto auto 0 auto;
+	}
+
+	.mute-toggle {
+
+		&.react-toggle--focus .react-toggle-thumb {
+			box-shadow: none;
+		}
+
+		&.react-toggle:active .react-toggle-thumb {
+			box-shadow: none;
+		}
+	}
+
+	.mute-icon {
+		width: 16px;
+		height: 12px;
+		fill: white;
+	}
 }
