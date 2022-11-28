@@ -174,7 +174,6 @@
 			@media (max-width: 999px) {
 				flex-direction: column-reverse;
 				height: auto;
-				border: none;
 
 				.bet-action {
 					width: auto;
@@ -288,6 +287,17 @@
 			position: absolute;
 			left: -8px;
 			bottom: -10px;
+		}
+
+		@media (max-width: 999px) {
+			margin-left: auto;
+			margin-right: auto;
+
+			.react-toggle {
+				position: relative;
+				inset: 0px;
+				margin-top: 4px;
+			}
 		}
 	}
 
