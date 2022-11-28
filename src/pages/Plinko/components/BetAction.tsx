@@ -233,6 +233,9 @@ const BetAction = ({
 				className="send-ball"
 				onClick={handleRunBet}
 				disabled={inGameBallsCount > 0 && isAuto}
+				style={{
+					cursor: `${inGameBallsCount > 0 && isAuto ? 'not-allowed' : 'pointer'}`,
+				}}
 			>
 				Send ball
 			</button>

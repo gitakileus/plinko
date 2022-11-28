@@ -163,10 +163,9 @@
 				}
 
 				&.disabled {
-          
+
 					input,
-					select,
-					.send-ball {
+					select {
 						cursor: not-allowed;
 					}
 				}
