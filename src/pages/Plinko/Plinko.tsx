@@ -128,7 +128,6 @@ const Plinko = () => {
 			const minBallX = worldWidth / 2 + widthUnit
 			const maxBallX = worldWidth / 2 - widthUnit
 			const ballX = random(minBallX, maxBallX)
-			// const ballX = 311.3712
 			const ballColor = '#ff9010'
 			const ball = Bodies.circle(ballX, heightUnit, pinSize * 1.8, {
 				restitution: 1,

@@ -3,7 +3,9 @@ import './footer.scss'
 const Footer = () => {
 	return (
 		<footer>
-			<p>&copy; 2022 Servica IO, Inc. ALL rights reserved</p>
+			<p className="contact-us">
+				Want to customize this game for your project? <u>Contact Us</u>
+			</p>
 		</footer>
 	)
 }

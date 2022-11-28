@@ -63,7 +63,7 @@ const GameBoard = ({
 
 	return (
 		<div className="game-board" ref={boardRef}>
-			{isAuto && leftBallCount !== 0 && (
+			{isAuto && leftBallCount > 0 && (
 				<span className="left-ball-count">Balls Left: {leftBallCount}</span>
 			)}
 			<div className="game-content" ref={contentRef}>
@@ -90,8 +90,7 @@ const GameBoard = ({
 							key={String(mul) + String(index)}
 							className={activeBlock === index ? 'highlighted' : ''}
 						>
-							{mul}
-							{mul < 100 ? 'x' : ''}
+							{`${mul}${mul < 100 ? 'x' : ''}`}
 						</div>
 					))}
 				</div>

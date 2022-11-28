@@ -2,10 +2,15 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
+  border-top: 1px solid var(--primary);
   height: 40px;
   background: var(--theme);
 
-  p {
+  .contact-us {
     text-align: center;
+
+    u {
+      cursor: pointer;
+    }
   }
 }
