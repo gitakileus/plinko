@@ -102,7 +102,9 @@ const GameBoard = ({
 							<button
 								key={`${multiplier.mul}${index}${Math.random()}`}
 								style={{
-									backgroundColor: color[lines / 4 - 2][multiplier.index]?.bg,
+									backgroundColor:
+										color[lines / 4 - 2][multiplier.index]?.bg ||
+										color[lines / 4 - 2][16 - multiplier.index]?.bg,
 									// opacity: index === 0 ? 0.2 : 1,
 								}}
 							>
