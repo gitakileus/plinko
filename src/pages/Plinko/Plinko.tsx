@@ -20,11 +20,11 @@ import MainLayout from 'layouts/MainLayout'
 import Panel from './components/BetAction'
 import GameBoard from './components/GameBoard'
 import styles from './plinko.module.scss'
-import BallAudio from 'assets/sounds/ball.wav'
-import MultiplierLowAudio from 'assets/sounds/multiplier-low.wav'
-import MultiplierRegularAudio from 'assets/sounds/multiplier-regular.wav'
-import MultiplierGoodAudio from 'assets/sounds/multiplier-good.wav'
-import MultiplierBestAudio from 'assets/sounds/multiplier-best.wav'
+// import BallAudio from 'assets/sounds/ball.wav'
+// import MultiplierLowAudio from 'assets/sounds/multiplier-low.wav'
+// import MultiplierRegularAudio from 'assets/sounds/multiplier-regular.wav'
+// import MultiplierGoodAudio from 'assets/sounds/multiplier-good.wav'
+// import MultiplierBestAudio from 'assets/sounds/multiplier-best.wav'
 
 const Plinko = () => {
 	const engine = Engine.create()
@@ -209,13 +209,13 @@ const Plinko = () => {
 			const tempTarget = target > lines / 2 ? lines - target : target
 			let multiplierSound
 			if (tempTarget === 0) {
-				multiplierSound = new Audio(MultiplierBestAudio)
+				multiplierSound = new Audio(require('assets/sounds/multiplier-best.wav'))
 			} else if (tempTarget === lines / 2 || tempTarget === lines / 2 - 1) {
-				multiplierSound = new Audio(MultiplierLowAudio)
+				multiplierSound = new Audio(require('assets/sounds/multiplier-low.wav'))
 			} else if (tempTarget > 0 && tempTarget < lines / 4) {
-				multiplierSound = new Audio(MultiplierGoodAudio)
+				multiplierSound = new Audio(require('assets/sounds/multiplier-good.wav'))
 			} else {
-				multiplierSound = new Audio(MultiplierRegularAudio)
+				multiplierSound = new Audio(require('assets/sounds/multiplier-regular.wav'))
 			}
 			multiplierSound.volume = 0.2
 			multiplierSound.currentTime = 0
@@ -249,7 +249,7 @@ const Plinko = () => {
 
 	const onBounceCollision = async (event: IEventCollision<Engine>) => {
 		if (!muteRef.current) {
-			const ballSound = new Audio(BallAudio)
+			const ballSound = new Audio(require('assets/sounds/ball.wav'))
 			ballSound.volume = 0.2
 			ballSound.currentTime = 0
 			ballSound.play()
