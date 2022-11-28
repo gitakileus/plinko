@@ -229,7 +229,11 @@ const BetAction = ({
 			) : (
 				<></>
 			)}
-			<button className="send-ball" onClick={handleRunBet}>
+			<button
+				className="send-ball"
+				onClick={handleRunBet}
+				disabled={inGameBallsCount > 0 && isAuto}
+			>
 				Send ball
 			</button>
 		</div>
