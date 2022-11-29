@@ -206,21 +206,27 @@ const Plinko = () => {
 		const xPos = ball.position.x
 		const target = Math.floor((xPos - pinSize) / (widthUnit * 2))
 		if (!muteRef.current) {
-			const tempTarget = target > lines / 2 ? lines - target : target
-			let multiplierSound
-			if (tempTarget === 0) {
-				multiplierSound = new Audio(require('assets/sounds/multiplier-best.wav'))
-			} else if (tempTarget === lines / 2 || tempTarget === lines / 2 - 1) {
-				multiplierSound = new Audio(require('assets/sounds/multiplier-low.wav'))
-			} else if (tempTarget > 0 && tempTarget < lines / 4) {
-				multiplierSound = new Audio(require('assets/sounds/multiplier-good.wav'))
-			} else {
-				multiplierSound = new Audio(require('assets/sounds/multiplier-regular.wav'))
-			}
+			const multiplierSound = new Audio(require('assets/sounds/multiplier.wav'))
 			multiplierSound.volume = 0.2
 			multiplierSound.currentTime = 0
 			multiplierSound.play()
 		}
+		// if (!muteRef.current) {
+		// 	const tempTarget = target > lines / 2 ? lines - target : target
+		// 	let multiplierSound
+		// 	if (tempTarget === 0) {
+		// 		multiplierSound = new Audio(require('assets/sounds/multiplier-best.wav'))
+		// 	} else if (tempTarget === lines / 2 || tempTarget === lines / 2 - 1) {
+		// 		multiplierSound = new Audio(require('assets/sounds/multiplier-low.wav'))
+		// 	} else if (tempTarget > 0 && tempTarget < lines / 4) {
+		// 		multiplierSound = new Audio(require('assets/sounds/multiplier-good.wav'))
+		// 	} else {
+		// 		multiplierSound = new Audio(require('assets/sounds/multiplier-regular.wav'))
+		// 	}
+		// 	multiplierSound.volume = 0.2
+		// 	multiplierSound.currentTime = 0
+		// 	multiplierSound.play()
+		// }
 		const multiplierValue = multiplierValues[risk][lines / 4 - 2][target]
 		setActiveBlock(-1)
 		setTimeout(() => {
