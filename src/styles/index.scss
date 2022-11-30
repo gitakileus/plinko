@@ -22,6 +22,25 @@
 	}
 }
 
+@keyframes balance {
+	0% {
+		top: 24px;
+		opacity: 1;
+		scale: 0.8;
+	}
+
+	40% {
+		top: 36px;
+		scale: 1.2;
+	}
+
+	100% {
+		top: 12px;
+		opacity: 0;
+		scale: 0.4;
+	}
+}
+
 *,
 ::before,
 ::after {
@@ -63,8 +82,7 @@ body {
 	margin-right: auto;
 	width: 1200px;
 
-	@include media-xl {
-	}
+	@include media-xl {}
 
 	@include media-lg {
 		margin-left: 24px;
@@ -77,9 +95,7 @@ body {
 		margin-right: 12px;
 	}
 
-	@include media-sm {
-	}
+	@include media-sm {}
 
-	@include media-xs {
-	}
+	@include media-xs {}
 }

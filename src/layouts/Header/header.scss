@@ -13,8 +13,19 @@ header {
 	}
 
 	nav {
+		position: relative;
 		display: flex;
 		gap: 12px;
 		margin-left: auto;
+
+		.diff {
+			position: absolute;
+			top: 0;
+			left: 36px;
+			opacity: 0;
+			animation-name: balance;
+			animation-duration: 600ms;
+			color: #ff0;
+		}
 	}
 }
