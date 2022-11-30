@@ -19,7 +19,7 @@ const Balance = (props: Props) => {
 	return (
 		<div className={`my-current-balance ${open ? 'open' : ''}`}>
 			<div className="content" onClick={() => setOpen((prev) => !prev)}>
-				<span>US$ {props.balance.toFixed(2)}</span>
+				<span>$ {props.balance.toFixed(2)}</span>
 				<div className="currency">
 					<img
 						src={balanceDropdown[activeCurrency].imgUrl}

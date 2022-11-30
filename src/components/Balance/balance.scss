@@ -1,3 +1,5 @@
+@import 'styles/mixin/media';
+
 .my-current-balance {
   position: relative;
   user-select: none;
@@ -47,6 +49,21 @@
         width: 24px;
         height: 24px;
       }
+    }
+  }
+
+  @include media-xs {
+    flex-grow: 1;
+    .currency {
+      margin-left: auto;
+    }
+    .content span {
+      width: auto;
+      white-space: nowrap;
+      font-size: 14px;
+    }
+    .dropdown-icon {
+      // display: none;
     }
   }
 

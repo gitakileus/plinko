@@ -1,15 +1,16 @@
+@import 'styles/mixin/media';
+
 header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	box-shadow: 0 1px 1px 0 #0005;
-	height: 72px;
-	padding-left: 12px;
-	padding-right: 12px;
+	padding: 12px;
 	background: var(--background);
 
 	img.logo {
 		width: 48px;
+		margin-right: 12px;
 	}
 
 	nav {
@@ -26,6 +27,16 @@ header {
 			animation-name: balance;
 			animation-duration: 600ms;
 			color: #ff0;
+		}
+	}
+
+	@include media-xs {
+		nav {
+			flex-grow: 1;
+			.wallet-adapter-button {
+				padding: 0px 12px;
+				font-size: 14px;
+			}
 		}
 	}
 }

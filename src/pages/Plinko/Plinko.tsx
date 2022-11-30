@@ -12,6 +12,7 @@ import {
 	World,
 } from 'matter-js'
 import axios from 'axios'
+import { isMobile } from 'react-device-detect'
 import { useGameStore } from 'store/game'
 import { random } from 'utils/random'
 import { LinesType, RiskType } from './@types'
@@ -62,7 +63,9 @@ const Plinko = () => {
 	}, [inGameBallsCount]) //eslint-disable-line
 
 	useEffect(() => {
-		engine.gravity.y = engineConfig.engineGravity
+		engine.gravity.y = isMobile
+			? engineConfig.engineGravity * 1.1
+			: engineConfig.engineGravity
 		const element = document.getElementById('plinko')
 		const render = Render.create({
 			element: element!,
