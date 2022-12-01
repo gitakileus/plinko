@@ -1,5 +1,5 @@
 const engine = {
-	engineGravity: 1.8,
+	engineGravity: 2,
 }
 
 const world = {
