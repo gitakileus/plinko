@@ -41,6 +41,7 @@ const BetAction = ({
 }: PlinkoBetActions) => {
 	let balanceState = useGameStore((state) => state.balance)
 	const balance = useGameStore((state) => state.balance)
+	const currency = useGameStore((state) => state.currency)
 	const isLoading = false
 	const isAuth = true
 	const [betValue, setBetValue] = useState<number>(1)
@@ -84,13 +85,14 @@ const BetAction = ({
 	const handleDoubleBet = () => {
 		if (!isAuth || isLoading) return
 		const value = betValue * 2
-		const newBetvalue = isNaN(value) || value > balance ? 0 : Number(value.toFixed(4))
+		const newBetvalue =
+			isNaN(value) || value > balance[currency] ? 0 : Number(value.toFixed(4))
 		setBetValue(newBetvalue)
 	}
 
 	const handleMaxBet = () => {
 		if (!isAuth || isLoading) return
-		setBetValue(+balance.toFixed(2))
+		setBetValue(+balance[currency].toFixed(2))
 	}
 
 	const handleAutoBallCountChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -110,7 +112,7 @@ const BetAction = ({
 		if (inGameBallsCount >= maxBallsCount) return
 
 		if (!isAuto) {
-			if (betValue > balance) {
+			if (betValue > balance[currency]) {
 				toast.error(
 					<div style={{ color: 'red', fontSize: '18px' }}>Not Enough Fund!</div>
 				)
@@ -131,7 +133,7 @@ const BetAction = ({
 				clearInterval(timerId)
 				timerId = null
 			} else {
-				if (betValue > balanceState) {
+				if (betValue > balanceState[currency]) {
 					toast.error(
 						<div style={{ color: 'red', fontSize: '18px' }}>Not Enough Fund!</div>
 					)
@@ -141,7 +143,7 @@ const BetAction = ({
 					onChangeLeftBallCount(0)
 					return
 				}
-				balanceState -= betValue
+				balanceState[currency] -= betValue
 				incrementBalance(-betValue)
 				onRunBet(betValue)
 				setCurId((prev) => prev + 1)
@@ -247,7 +249,7 @@ const BetAction = ({
 			>
 				Send ball
 			</button>
-			<div className='toggle-button'>
+			<div className="toggle-button">
 				<Toggle
 					checked={!muted}
 					onChange={() => onChangeMuted(!muted)}

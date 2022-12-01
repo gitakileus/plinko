@@ -234,7 +234,7 @@ const Plinko = () => {
 		setActiveBlock(-1)
 		setTimeout(() => {
 			setActiveBlock(target)
-		}, 10)
+		}, 5)
 		console.log('Risk:', risk, 'lines: ', lines)
 		console.log('betValue:', ballValue, 'multiplier:', multiplierValue)
 		incrementBalance(+ballValue * multiplierValue)

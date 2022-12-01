@@ -2,16 +2,18 @@ import { useState } from 'react'
 import balanceDropdown from 'config/balanceDropdown'
 import { ReactComponent as DropdownIcon } from 'assets/icons/dropdown.svg'
 import './balance.scss'
+import { useGameStore } from 'store/game'
 
-type Props = {
-	balance: number
-}
+const Balance = () => {
+	const balance = useGameStore((state) => state.balance)
+	const currency = useGameStore((state) => state.currency)
+	const setCurrency = useGameStore((state) => state.setCurrency)
 
-const Balance = (props: Props) => {
 	const [activeCurrency, setActiveCurrency] = useState(0)
 	const [open, setOpen] = useState(false)
 
 	const handleSelectCurrency = (index: number) => {
+		setCurrency(balanceDropdown[index].unit)
 		setActiveCurrency(index)
 		setOpen(false)
 	}
@@ -19,7 +21,7 @@ const Balance = (props: Props) => {
 	return (
 		<div className={`my-current-balance ${open ? 'open' : ''}`}>
 			<div className="content" onClick={() => setOpen((prev) => !prev)}>
-				<span>$ {props.balance.toFixed(2)}</span>
+				<span>$ {balance[currency].toFixed(2)}</span>
 				<div className="currency">
 					<img
 						src={balanceDropdown[activeCurrency].imgUrl}
@@ -36,7 +38,7 @@ const Balance = (props: Props) => {
 						key={item.unit}
 						onClick={() => handleSelectCurrency(index)}
 					>
-						<span>US$ 0.00</span>
+						<span>US$ {balance[item.unit].toFixed(2)}</span>
 						<div className="currency">
 							<img
 								src={item.imgUrl}
