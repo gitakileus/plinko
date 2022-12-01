@@ -63,10 +63,11 @@ const Plinko = () => {
 	}, [inGameBallsCount]) //eslint-disable-line
 
 	useEffect(() => {
-		// engine.gravity.y = isMobile
-		// 	? engineConfig.engineGravity * 1.1
-		// 	: engineConfig.engineGravity
-		engine.gravity.y = engineConfig.engineGravity
+		engine.gravity.y = isMobile
+			? engineConfig.engineGravity * 2
+			: engineConfig.engineGravity
+		console.log(engine.gravity.y)
+		// engine.gravity.y = engineConfig.engineGravity
 		const element = document.getElementById('plinko')
 		const render = Render.create({
 			element: element!,
