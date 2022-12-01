@@ -6,7 +6,7 @@ type Props = {
 	lines: LinesType
 	risk: 'Low' | 'Mid' | 'High'
 	pinSize: number
-	activeBlock: number
+	activeBlock?: number
 	multiplierHistory: Record<any, any>[]
 	leftBallCount: number
 	isAuto: boolean
@@ -16,7 +16,7 @@ const GameBoard = ({
 	lines,
 	risk = 'Low',
 	pinSize,
-	activeBlock,
+	activeBlock = -1,
 	multiplierHistory,
 	leftBallCount,
 	isAuto,

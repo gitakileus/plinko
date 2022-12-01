@@ -33,7 +33,7 @@ const Plinko = () => {
 	const [lines, setLines] = useState<LinesType>(8)
 	const [risk, setRisk] = useState<RiskType>('Low')
 	const inGameBallsCount = useGameStore((state) => state.gamesRunning)
-	const [activeBlock, setActiveBlock] = useState(0)
+	const [activeBlock, setActiveBlock] = useState(-1)
 	const [autoBallCount, setAutoBallCount] = useState<number>(1)
 	const [lastMultipliers, setLastMultipliers] = useState<Record<any, any>[]>([])
 	const incrementInGameBallsCount = useGameStore((state) => state.incrementGamesRunning)
@@ -43,7 +43,9 @@ const Plinko = () => {
 	const worldHeight: number = worldConfig.height
 	const incrementBalance = useGameStore((state) => state.incrementBalance)
 	const [leftBallCount, setLeftBallCount] = useState<number>(0)
-	const [muted, setMuted] = useState<boolean>(false)
+	const [muted, setMuted] = useState<boolean>(
+		localStorage.getItem('muted') === 'true' ? true : false
+	)
 	const muteRef = useRef<any>(null)
 	muteRef.current = muted
 
@@ -66,7 +68,6 @@ const Plinko = () => {
 		engine.gravity.y = isMobile
 			? engineConfig.engineGravity * 2
 			: engineConfig.engineGravity
-		console.log(engine.gravity.y)
 		// engine.gravity.y = engineConfig.engineGravity
 		const element = document.getElementById('plinko')
 		const render = Render.create({
@@ -289,13 +290,18 @@ const Plinko = () => {
 						World.remove(engine.world, bounceEffect)
 						clearInterval(bounceTimer)
 					}
-				}, 10)
+				}, 5)
 			}
 		}
 	}
 
 	Events.on(engine, 'collisionStart', onBodyCollision)
 	Events.on(engine, 'collisionStart', onBounceCollision)
+
+	const handleSetMuted = () => {
+		localStorage.setItem('muted', muted === true ? 'false' : 'true')
+		setMuted((prev) => !prev)
+	}
 
 	return (
 		<MainLayout title="PLINKO" className={styles.plinko}>
@@ -313,7 +319,7 @@ const Plinko = () => {
 						leftBallCount={leftBallCount}
 						onChangeLeftBallCount={setLeftBallCount}
 						muted={muted}
-						onChangeMuted={setMuted}
+						onChangeMuted={handleSetMuted}
 					/>
 					<GameBoard
 						lines={lines}
