@@ -212,7 +212,7 @@ const Plinko = () => {
 		const xPos = ball.position.x
 		const target = Math.floor((xPos - pinSize) / (widthUnit * 2))
 		if (!muteRef.current) {
-			const multiplierSound = new Audio(require('assets/sounds/reach_2.mp3'))
+			const multiplierSound = new Audio(require('assets/sounds/reach_2.wav'))
 			multiplierSound.volume = 0.2
 			multiplierSound.currentTime = 0
 			multiplierSound.play()
@@ -261,7 +261,7 @@ const Plinko = () => {
 
 	const onBounceCollision = async (event: IEventCollision<Engine>) => {
 		if (!muteRef.current) {
-			const ballSound = new Audio(require('assets/sounds/dot_4.mp3'))
+			const ballSound = new Audio(require('assets/sounds/dot_4.wav'))
 			ballSound.volume = 0.2
 			ballSound.currentTime = 0
 			ballSound.play()
