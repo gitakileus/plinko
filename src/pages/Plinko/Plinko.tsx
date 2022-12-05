@@ -211,11 +211,18 @@ const Plinko = () => {
 		const startPos = ball.label.split('-')[2]
 		const xPos = ball.position.x
 		const target = Math.floor((xPos - pinSize) / (widthUnit * 2))
+
 		if (!muteRef.current) {
-			const multiplierSound = new Audio(require('assets/sounds/reach_2.wav'))
+			const multiplierSound = new Audio()
+			multiplierSound.autoplay = true
+
+			multiplierSound.src = 'sounds/reach_2.wav'
 			multiplierSound.volume = 0.2
-			multiplierSound.currentTime = 0
-			multiplierSound.play()
+
+			// const multiplierSound = new Audio(require('assets/sounds/reach_2.wav'))
+			// multiplierSound.volume = 0.2
+			// multiplierSound.currentTime = 0
+			// multiplierSound.play()
 		}
 		// if (!muteRef.current) {
 		// 	const tempTarget = target > lines / 2 ? lines - target : target
@@ -261,10 +268,15 @@ const Plinko = () => {
 
 	const onBounceCollision = async (event: IEventCollision<Engine>) => {
 		if (!muteRef.current) {
-			const ballSound = new Audio(require('assets/sounds/dot_4.wav'))
+			const ballSound = new Audio()
+			ballSound.autoplay = true
+
+			ballSound.src = 'sounds/dot_4.wav'
 			ballSound.volume = 0.2
-			ballSound.currentTime = 0
-			ballSound.play()
+			// const ballSound = new Audio(require('assets/sounds/dot_4.wav'))
+			// ballSound.volume = 0.2
+			// ballSound.currentTime = 0
+			// ballSound.play()
 		}
 
 		const pairs = event.pairs
