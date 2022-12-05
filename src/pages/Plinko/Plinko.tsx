@@ -49,6 +49,14 @@ const Plinko = () => {
 	const muteRef = useRef<any>(null)
 	muteRef.current = muted
 
+	// const ballSound = new Audio()
+	// ballSound.src = 'sounds/dot_4.wav'
+	// ballSound.volume = 0.2
+
+	// const multiplierSound = new Audio()
+	// multiplierSound.src = 'sounds/reach_2.wav'
+	// multiplierSound.volume = 0.2
+
 	const alertUser = (e: BeforeUnloadEvent) => {
 		if (inGameBallsCount > 0) {
 			e.preventDefault()
@@ -219,6 +227,8 @@ const Plinko = () => {
 			multiplierSound.src = 'sounds/reach_2.wav'
 			multiplierSound.volume = 0.2
 
+			multiplierSound.remove();
+
 			// const multiplierSound = new Audio(require('assets/sounds/reach_2.wav'))
 			// multiplierSound.volume = 0.2
 			// multiplierSound.currentTime = 0
@@ -270,9 +280,9 @@ const Plinko = () => {
 		if (!muteRef.current) {
 			const ballSound = new Audio()
 			ballSound.autoplay = true
-
 			ballSound.src = 'sounds/dot_4.wav'
 			ballSound.volume = 0.2
+			ballSound.remove()
 			// const ballSound = new Audio(require('assets/sounds/dot_4.wav'))
 			// ballSound.volume = 0.2
 			// ballSound.currentTime = 0
