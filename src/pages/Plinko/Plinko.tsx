@@ -280,7 +280,7 @@ const Plinko = () => {
 		if (!muteRef.current) {
 			const ballSound = new Audio()
 			ballSound.autoplay = true
-			ballSound.src = 'sounds/dot_4.wav'
+			ballSound.src = 'sounds/dot_6.mp3'
 			ballSound.volume = 0.2
 			ballSound.remove()
 			// const ballSound = new Audio(require('assets/sounds/dot_4.wav'))
