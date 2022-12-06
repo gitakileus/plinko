@@ -90,6 +90,9 @@ const GameBoard = ({
 							key={String(mul) + String(index)}
 							className={activeBlock === index ? 'highlighted' : ''}
 						>
+							{(index === 0 || index === multiplier[risk][lines / 4 - 2].length - 1) && (
+								<div className="gradient" />
+							)}
 							{`${mul}${mul < 100 ? 'x' : ''}`}
 						</div>
 					))}

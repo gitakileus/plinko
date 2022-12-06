@@ -3,6 +3,9 @@
 .my-current-balance {
   position: relative;
   user-select: none;
+  font-size: 22px;
+  line-height: 1.5;
+  font-weight: 600;
 
   .content {
     position: relative;
@@ -10,23 +13,26 @@
     display: flex;
     align-items: center;
     cursor: pointer;
-    border: 2px solid #557086;
-    border-radius: 4px;
-    padding: 0px 12px;
-    height: 48px;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    padding: 14px;
+    height: 60px;
+    background-color: #171224;
 
     span {
       width: 120px;
     }
 
     .dropdown-icon {
-      width: 16px;
-      height: 16px;
+      scale: 0.7;
       fill: white;
 
       path {
         fill: white;
       }
+    }
+    @include media-sm {
+      height: 48px;
     }
   }
 
@@ -36,32 +42,47 @@
     justify-content: center;
     margin: 0 4px;
     border-radius: 99px;
-    width: 24px;
-    height: 24px;
-    background-color: var(--primary);
+    width: 34px;
+    height: 34px;
+    background-color: #2F244A;
 
     img.currency-icon {
       transition: none;
-      width: 16px;
-      height: 16px;
+      width: 20px;
+      height: 20px;
 
       &.full {
-        width: 24px;
-        height: 24px;
+        width: 34px;
+        height: 34px;
       }
     }
   }
 
-  @include media-xs {
+  @include media-sm {
     flex-grow: 1;
+
     .currency {
       margin-left: auto;
+      width: 24px;
+      height: 24px;
+
+      img.currency-icon {
+        width: 16px;
+        height: 16px;
+
+        &.full {
+          width: 24px;
+          height: 24px;
+        }
+      }
     }
+
     .content span {
       width: auto;
       white-space: nowrap;
       font-size: 14px;
     }
+
     .dropdown-icon {
       // display: none;
     }
@@ -70,13 +91,13 @@
   .dropdown {
     position: absolute;
     z-index: 9999;
-    top: 56px;
+    top: 64px;
     left: 0;
     display: grid;
     gap: 4px;
     overflow: hidden;
-    border: 2px solid #557086;
-    border-radius: 4px;
+    border: 1px solid #fff;
+    border-radius: 10px;
     padding: 4px;
     background-color: var(--primary);
 
@@ -88,10 +109,19 @@
       align-items: center;
       cursor: pointer;
       background-color: transparent;
-      border-radius: 4px;
       padding: 0px 12px;
       height: 48px;
-      font-size: 12px;
+      font-size: 16px;
+
+      &:first-child {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+      }
+
+      &:last-child {
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+      }
 
       span {
         width: 100px;
@@ -116,6 +146,7 @@
     .content .dropdown-icon {
       rotate: -180deg;
     }
+
     .dropdown {
       transform: scaleY(1);
     }

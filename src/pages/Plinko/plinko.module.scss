@@ -10,7 +10,7 @@
 	}
 
 	.plinko-container {
-		padding-top: 40px;
+		padding-top: 24px;
 		padding-bottom: 40px;
 		max-width: 1200px;
 
@@ -18,80 +18,114 @@
 			padding-top: 24px;
 			padding-bottom: 24px;
 			max-width: 400px;
+
+			.game-box {
+				border-width: 3px !important;
+			}
 		}
 
 		.game-box {
 			display: flex;
 			overflow: hidden;
-			border-top-left-radius: 8px;
-			border-top-right-radius: 8px;
-			border-bottom: 3px solid var(--background);
+			border: 3px solid var(--background);
+			border-top-width: 5px;
+			border-right-width: 4px;
+			border-bottom-width: 8px;
+			border-radius: 32px;
 			background: var(--primary);
 
 			.bet-action {
 				display: flex;
 				flex-direction: column;
-				row-gap: 12px;
 				min-width: 300px;
-				padding: 12px;
+				padding: 60px 18px 18px;
 				background-color: var(--background);
 
 				.game-type {
 					display: grid;
 					grid-template-columns: repeat(2, minmax(0, 1fr));
 					gap: 5px;
-					border-radius: 9999px;
+					border-radius: 10px;
 					padding: 5px;
 					background-color: var(--primary);
 
 					button {
-						border-radius: 9999px;
+						border-radius: 8px;
 						border: none;
-						padding: 7px;
+						padding: 3px;
 						background-color: transparent;
+						font-size: 22px;
+						line-height: 1.5;
+						font-weight: 600;
 
 						&.active {
-							background-color: #2f4553;
+							background-color: var(--background);
+						}
+
+						&:not(.active) {
+							color: #6F5CB2;
 						}
 
 						&:hover {
-							background-color: #2f4553;
+							background-color: var(--background);
 						}
 					}
 				}
 
+				span.title {
+					margin-left: 4px;
+					font-size: 18px;
+					line-height: 1.5;
+					font-weight: 600;
+					color: #6D6198;
+				}
+
 				.bet-amount {
+					margin-top: 36px;
+
 					.input-box {
 						display: flex;
 						align-items: center;
-						border-radius: 8px;
-						border: 2px solid #2f4553;
+						border-radius: 10px;
 						padding: 5px;
 						background-color: var(--primary);
 
 						span {
 							margin-right: 4px;
 							margin-left: 8px;
+							font-size: 20px;
+							line-height: 1.5;
+							font-weight: 600;
 						}
 
 						input {
 							border: none;
 							outline: none;
 							margin-right: 8px;
-							width: 100%;
+							width: 80px;
 							background-color: var(--primary);
+							font-size: 20px;
+							line-height: 1.5;
+							font-weight: 600;
 						}
 
 						div {
 							display: flex;
-							gap: 4px;
+							gap: 3px;
 							margin-left: auto;
 
 							button {
 								border: none;
+								border-radius: 8px;
 								padding: 8px;
-								background-color: #2f4553;
-								font-size: 12px;
+								background-color: #1C182A;
+								font-size: 16px;
+								font-family: 'Poppins';
+
+								&:hover {
+									background-color: var(--secondary);
+									color: white;
+								}
 							}
 						}
 
@@ -101,11 +135,18 @@
 					}
 				}
 
+				.risk {
+					margin-top: 24px;
+				}
+
+				.rows {
+					margin-top: 4px;
+				}
+
 				.risk,
 				.rows {
 					div {
-						border: 2px solid #2f4553;
-						border-radius: 8px;
+						border-radius: 10px;
 						background-color: var(--primary);
 
 						select {
@@ -114,6 +155,9 @@
 							margin: 8px;
 							width: -webkit-fill-available;
 							background-color: transparent;
+							font-size: 18px;
+							line-height: 1.5;
+							color: #BFAEF8;
 						}
 
 						&:hover {
@@ -123,8 +167,9 @@
 				}
 
 				.number-of-bets {
+					margin-top: 4px;
+
 					div {
-						border: 2px solid #2f4553;
 						border-radius: 8px;
 						background: var(--primary);
 
@@ -135,6 +180,8 @@
 							padding-left: 4px;
 							width: -webkit-fill-available;
 							background-color: transparent;
+							font-size: 18px;
+							line-height: 1.5;
 
 							&::-webkit-outer-spin-button,
 							&::-webkit-inner-spin-button {
@@ -150,16 +197,15 @@
 				}
 
 				.send-ball {
-					height: 60px;
+					margin-top: 32px;
+					box-shadow: 0px 7px #5F2DCA;
+					height: 64px;
 					border: none;
 					background-color: var(--secondary);
-					font-size: 16px;
+					font-size: 22px;
+					line-height: 1.5;
 					font-weight: 700;
-					color: var(--primary);
-
-					&:hover {
-						background-color: #1fff20;
-					}
+					color: #fff;
 				}
 
 				&.disabled {
@@ -176,10 +222,17 @@
 				height: auto;
 
 				.bet-action {
+					padding-top: 20px;
 					width: auto;
 
 					.bet-amount {
+						margin-top: 0;
 						order: -3;
+					}
+
+					.game-type {
+						margin-top: 20px;
+						margin-bottom: 20px;
 					}
 
 					.send-ball {
@@ -218,6 +271,7 @@
 
 					div {
 						position: relative;
+						z-index: 1;
 						display: flex;
 						align-items: center;
 						justify-content: center;
@@ -232,6 +286,17 @@
 						font-weight: bold;
 						text-align: center;
 						color: #000c;
+
+						.gradient {
+							position: absolute;
+							z-index: -1;
+							top: 50%;
+							left: 50%;
+							width: 144px;
+							height: 144px;
+							transform: translate3d(-50%, -50%, 0);
+							background: radial-gradient(#EA334742, #EA334700, transparent);
+						}
 
 						&.highlighted {
 							animation-name: bounce;
@@ -309,9 +374,23 @@
 		&.react-toggle:active .react-toggle-thumb {
 			box-shadow: none;
 		}
+
 		.react-toggle-track-x {
 			right: 14px;
 		}
+
+		.react-toggle-thumb {
+			border: none;
+		}
+	}
+
+	.react-toggle--checked .react-toggle-track,
+	.react-toggle--checked .react-toggle-track:hover {
+		background-color: var(--secondary);
+	}
+
+	.react-toggle--checked:hover:not(.react-toggle--disabled) .react-toggle-track {
+		background-color: var(--secondary);
 	}
 
 	.mute-icon {

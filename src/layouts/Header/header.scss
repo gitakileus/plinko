@@ -4,20 +4,31 @@ header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	box-shadow: 0 1px 1px 0 #0005;
-	padding: 12px;
-	background: var(--background);
 
 	img.logo {
-		width: 48px;
+		width: 174px;
 		margin-right: 12px;
+
+		@include media-xs {
+			display: none;
+		}
+	}
+
+	img._logo {
+		display: none;
+		height: 80px;
+
+		@include media-xs {
+			display: block;
+		}
 	}
 
 	nav {
 		position: relative;
 		display: flex;
-		gap: 12px;
+		gap: 14px;
 		margin-left: auto;
+		margin-right: 30px;
 
 		.diff {
 			position: absolute;
@@ -28,11 +39,33 @@ header {
 			animation-duration: 600ms;
 			color: #ff0;
 		}
+
+		.wallet-adapter-button {
+			border: 1px solid #fff;
+			border-radius: 10px;
+			height: 60px;
+			background-color: #171224;
+			font-size: 22px;
+			line-height: 1.5;
+			font-weight: 600;
+		}
+
+		@include media-sm {
+			margin-right: 12px;
+			.wallet-adapter-button {
+				height: 48px;
+				font-size: 14px;
+				i {
+					display: none;
+				}
+			}
+		}
 	}
 
 	@include media-xs {
 		nav {
 			flex-grow: 1;
+
 			.wallet-adapter-button {
 				padding: 0px 12px;
 				font-size: 14px;

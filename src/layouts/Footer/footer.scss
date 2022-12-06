@@ -4,23 +4,27 @@ footer {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border-top: 1px solid var(--primary);
 	padding: 12px 0px;
-	background: var(--background);
 
 	.contact-us {
+		font-size: 18px;
+		line-height: 1.5;
+		font-weight: 500;
 		text-align: center;
+		color: #5B8BCD;
 
 		a {
 			cursor: pointer;
-			font-weight: 700;
-			color: #AE8EFF;
+			text-decoration: underline;
+			color: #BED8FD;
 		}
+
 		@include media-sm {
 			display: flex;
 			flex-direction: column;
 		}
 	}
+
 	@include media-sm {
 		padding: 8px 0;
 	}

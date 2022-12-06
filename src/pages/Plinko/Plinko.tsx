@@ -91,7 +91,7 @@ const Plinko = () => {
 				},
 			},
 			options: {
-				background: '#0F212E',
+				background: '#14111F',
 				hasBounds: true,
 				width: worldWidth,
 				height: worldHeight,
@@ -125,7 +125,7 @@ const Plinko = () => {
 				{
 					label: `pin-${i}`,
 					render: {
-						fillStyle: '#F5DCFF',
+						fillStyle: '#CABAFF',
 					},
 					isStatic: true,
 				}

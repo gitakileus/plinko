@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 @import './mixin/media';
 @import './mixin/variant';
 @import './mixin/button';
@@ -58,7 +58,7 @@ a {
 body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'Poppins', sans-serif;
 }
 
 .App {
@@ -66,7 +66,9 @@ body {
 	flex-direction: column;
 	min-height: 100vh;
 	height: 100%;
-	background: var(--theme);
+	background-image: url('../../public/images/background.png');
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
 
 	main {
 		flex-grow: 1;

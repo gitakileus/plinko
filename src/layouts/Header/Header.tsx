@@ -27,6 +27,7 @@ const Header = () => {
 	return (
 		<header>
 			<img src="/images/logo.png" alt="" className="logo" />
+			<img src="/images/_logo.png" alt="" className="_logo" />
 			<nav ref={ref}>
 				<Balance />
 				<WalletMultiButton />

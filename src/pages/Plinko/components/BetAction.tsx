@@ -170,7 +170,7 @@ const BetAction = ({
 				</button>
 			</div>
 			<div className="bet-amount">
-				<span>Bet amount</span>
+				<span className="title">Bet amount</span>
 				<div className="input-box highlight-hover">
 					<span>$</span>
 					<input
@@ -193,7 +193,7 @@ const BetAction = ({
 				</div>
 			</div>
 			<div className="risk">
-				<span>Risk</span>
+				<span className="title">Risk</span>
 				<div className="highlight-hover">
 					<select
 						onChange={handleChangeRisk}
@@ -209,7 +209,7 @@ const BetAction = ({
 				</div>
 			</div>
 			<div className="rows">
-				<span>Rows</span>
+				<span className="title">Rows</span>
 				<div className="highlight-hover">
 					<select
 						onChange={handleChangeLines}
@@ -218,7 +218,7 @@ const BetAction = ({
 					>
 						{linesOptions.map((line, index) => (
 							<option key={line} value={line} style={{ color: 'black' }}>
-								{line} Rows
+								{line}
 							</option>
 						))}
 					</select>
@@ -226,7 +226,7 @@ const BetAction = ({
 			</div>
 			{isAuto ? (
 				<div className="number-of-bets">
-					<span>Number of bets</span>
+					<span className="title">Number of bets</span>
 					<div className="highlight-hover">
 						<input
 							type="number"
