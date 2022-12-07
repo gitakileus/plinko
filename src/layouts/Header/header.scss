@@ -53,9 +53,11 @@ header {
 
 		@include media-sm {
 			margin-right: 12px;
+
 			.wallet-adapter-button {
 				height: 48px;
 				font-size: 14px;
+
 				i {
 					display: none;
 				}
