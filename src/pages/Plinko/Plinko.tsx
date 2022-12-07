@@ -326,7 +326,7 @@ const Plinko = () => {
 	}
 
 	return (
-		<MainLayout title="PLINKO" className={styles.plinko}>
+		<MainLayout title="Play Blinko" className={styles.plinko}>
 			<div className="plinko-container">
 				<div className="game-box">
 					<Panel

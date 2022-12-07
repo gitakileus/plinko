@@ -32,6 +32,7 @@ header {
 
 		.diff {
 			position: absolute;
+			z-index: 100000;
 			top: 0;
 			left: 36px;
 			opacity: 0;
@@ -43,9 +44,9 @@ header {
 		.wallet-adapter-button {
 			border: 1px solid #fff;
 			border-radius: 10px;
-			height: 60px;
+			height: 52px;
 			background-color: #171224;
-			font-size: 22px;
+			font-size: 20px;
 			line-height: 1.5;
 			font-weight: 600;
 		}
