@@ -37,6 +37,7 @@
 			.bet-action {
 				display: flex;
 				flex-direction: column;
+				gap: 16px;
 				min-width: 300px;
 				padding: 40px 12px 12px;
 				background-color: var(--background);
@@ -81,8 +82,6 @@
 				}
 
 				.bet-amount {
-					margin-top: 36px;
-
 					.input-box {
 						display: flex;
 						align-items: center;
@@ -135,14 +134,6 @@
 					}
 				}
 
-				.risk {
-					margin-top: 24px;
-				}
-
-				.rows {
-					margin-top: 4px;
-				}
-
 				.risk,
 				.rows {
 					div {
@@ -167,8 +158,6 @@
 				}
 
 				.number-of-bets {
-					margin-top: 4px;
-
 					div {
 						border-radius: 8px;
 						background: var(--primary);
@@ -197,7 +186,7 @@
 				}
 
 				.send-ball {
-					margin-top: 32px;
+					margin-top: 12px;
 					box-shadow: 0px 7px #5F2DCA;
 					height: 64px;
 					border: none;
@@ -226,13 +215,7 @@
 					width: auto;
 
 					.bet-amount {
-						margin-top: 0;
 						order: -3;
-					}
-
-					.game-type {
-						margin-top: 20px;
-						margin-bottom: 20px;
 					}
 
 					.send-ball {
@@ -404,6 +387,7 @@
 		.plinko-container {
 			height: 560px;
 		}
+
 		.game-box {
 			transform-origin: top;
 			scale: 0.8;
