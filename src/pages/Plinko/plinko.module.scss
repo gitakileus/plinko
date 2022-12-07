@@ -27,6 +27,7 @@
 		.game-box {
 			display: flex;
 			overflow: hidden;
+			outline: 1px solid #6D54C8;
 			border: 3px solid var(--background);
 			border-top-width: 5px;
 			border-right-width: 4px;

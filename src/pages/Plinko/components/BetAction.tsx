@@ -92,7 +92,7 @@ const BetAction = ({
 
 	const handleMaxBet = () => {
 		if (!isAuth || isLoading) return
-		setBetValue(+balance[currency].toFixed(2))
+		setBetValue(Math.floor(+balance[currency] * 100) / 100)
 	}
 
 	const handleAutoBallCountChange = (e: ChangeEvent<HTMLInputElement>) => {
