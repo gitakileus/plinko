@@ -20,6 +20,7 @@
 		"express": "^4.18.2",
 		"fs": "^0.0.1-security",
 		"matter-js": "^0.18.0",
+		"query-string": "^7.1.3",
 		"react": "^18.2.0",
 		"react-app-rewired": "^2.2.1",
 		"react-device-detect": "^2.2.2",

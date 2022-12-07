@@ -12,6 +12,7 @@ import {
 	World,
 } from 'matter-js'
 import axios from 'axios'
+import queryString from 'query-string'
 import { isMobile } from 'react-device-detect'
 import { useGameStore } from 'store/game'
 import { random } from 'utils/random'
@@ -48,6 +49,21 @@ const Plinko = () => {
 	)
 	const muteRef = useRef<any>(null)
 	muteRef.current = muted
+	const [option, setOption] = useState<number>(0)
+	const soundRef = useRef<any>(null)
+	soundRef.current = option
+
+	useEffect(() => {
+		const queryParams = queryString.parse(window.location.search)
+		if (
+			queryParams.option !== undefined &&
+			queryParams.option !== null &&
+			queryParams.option >= '1' &&
+			queryParams.option <= '4'
+		) {
+			setOption(+queryParams.option)
+		}
+	}, [])
 
 	// const ballSound = new Audio()
 	// ballSound.src = 'sounds/dot_4.wav'
@@ -227,29 +243,8 @@ const Plinko = () => {
 			multiplierSound.src = 'sounds/reach_2.wav'
 			multiplierSound.volume = 0.2
 
-			multiplierSound.remove();
-
-			// const multiplierSound = new Audio(require('assets/sounds/reach_2.wav'))
-			// multiplierSound.volume = 0.2
-			// multiplierSound.currentTime = 0
-			// multiplierSound.play()
+			multiplierSound.remove()
 		}
-		// if (!muteRef.current) {
-		// 	const tempTarget = target > lines / 2 ? lines - target : target
-		// 	let multiplierSound
-		// 	if (tempTarget === 0) {
-		// 		multiplierSound = new Audio(require('assets/sounds/multiplier-best.wav'))
-		// 	} else if (tempTarget === lines / 2 || tempTarget === lines / 2 - 1) {
-		// 		multiplierSound = new Audio(require('assets/sounds/multiplier-low.wav'))
-		// 	} else if (tempTarget > 0 && tempTarget < lines / 4) {
-		// 		multiplierSound = new Audio(require('assets/sounds/multiplier-good.wav'))
-		// 	} else {
-		// 		multiplierSound = new Audio(require('assets/sounds/multiplier-regular.wav'))
-		// 	}
-		// 	multiplierSound.volume = 0.2
-		// 	multiplierSound.currentTime = 0
-		// 	multiplierSound.play()
-		// }
 		const multiplierValue = multiplierValues[risk][lines / 4 - 2][target]
 		setActiveBlock(-1)
 		setTimeout(() => {
@@ -280,13 +275,24 @@ const Plinko = () => {
 		if (!muteRef.current) {
 			const ballSound = new Audio()
 			ballSound.autoplay = true
-			ballSound.src = 'sounds/dot_6.mp3'
+			switch (soundRef.current) {
+				case 1:
+					ballSound.src = 'sounds/dot_7.mp3'
+					break
+				case 2:
+					ballSound.src = 'sounds/dot_4_shorter.mp3'
+					break
+				case 3:
+					ballSound.src = 'sounds/dot_4.wav'
+					break
+				case 4:
+					ballSound.src = 'sounds/dot_2.mp3'
+					break
+				default:
+					ballSound.src = 'sounds/dot_6.mp3'
+			}
 			ballSound.volume = 0.2
 			ballSound.remove()
-			// const ballSound = new Audio(require('assets/sounds/dot_4.wav'))
-			// ballSound.volume = 0.2
-			// ballSound.currentTime = 0
-			// ballSound.play()
 		}
 
 		const pairs = event.pairs
