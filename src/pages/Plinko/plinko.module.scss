@@ -135,29 +135,6 @@
 					}
 				}
 
-				.risk,
-				.rows {
-					div {
-						border-radius: 10px;
-						background-color: var(--primary);
-
-						select {
-							border: none;
-							outline: none;
-							margin: 8px;
-							width: -webkit-fill-available;
-							background-color: transparent;
-							font-size: 18px;
-							line-height: 1.5;
-							color: #BFAEF8;
-						}
-
-						&:hover {
-							border-color: #557086;
-						}
-					}
-				}
-
 				.number-of-bets {
 					div {
 						border-radius: 8px;

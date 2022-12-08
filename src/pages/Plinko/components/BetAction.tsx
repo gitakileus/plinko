@@ -7,6 +7,7 @@ import { ReactComponent as MuteIcon } from 'assets/icons/mute.svg'
 import { ReactComponent as UnMuteIcon } from 'assets/icons/unmute.svg'
 import Toggle from 'react-toggle'
 import 'react-toggle/style.css'
+import Dropdown from 'components/Dropdown'
 
 type PlinkoBetActions = {
 	onRunBet: (betValue: number) => void
@@ -57,10 +58,15 @@ const BetAction = ({
 	// 	linesOptions.push(i);
 	// }
 
-	const handleChangeRisk = (e: ChangeEvent<HTMLSelectElement>) => {
+	// const handleChangeRisk = (e: ChangeEvent<HTMLSelectElement>) => {
+	// 	if (!isAuth || isLoading) return
+	// 	e.preventDefault()
+	// 	onChangeRisk(e.target.value as any)
+	// }
+
+	const handleChangeRisk = (option: string | number) => {
 		if (!isAuth || isLoading) return
-		e.preventDefault()
-		onChangeRisk(e.target.value as any)
+		onChangeRisk(option as any)
 	}
 
 	const handleChangeBetValue = (e: ChangeEvent<HTMLInputElement>) => {
@@ -69,10 +75,10 @@ const BetAction = ({
 		setBetValue(e.target.value as any)
 	}
 
-	const handleChangeLines = (e: ChangeEvent<HTMLSelectElement>) => {
+	const handleChangeLines = (option: string | number) => {
 		if (!isAuth || isLoading) return
 
-		onChangeLines(Number(e.target.value) as LinesType)
+		onChangeLines(option as LinesType)
 	}
 
 	const handleHalfBet = () => {
@@ -194,35 +200,21 @@ const BetAction = ({
 			</div>
 			<div className="risk">
 				<span className="title">Risk</span>
-				<div className="highlight-hover">
-					<select
-						onChange={handleChangeRisk}
-						defaultValue="Low"
-						disabled={inGameBallsCount > 0}
-					>
-						{riskOptions.map((risk) => (
-							<option key={risk} value={risk} style={{ color: 'black' }}>
-								{risk}
-							</option>
-						))}
-					</select>
-				</div>
+				<Dropdown
+					options={riskOptions}
+					defaultValue="Low"
+					onChange={handleChangeRisk}
+					disabled={inGameBallsCount > 0 ? true : false}
+				/>
 			</div>
 			<div className="rows">
 				<span className="title">Rows</span>
-				<div className="highlight-hover">
-					<select
-						onChange={handleChangeLines}
-						defaultValue={8}
-						disabled={inGameBallsCount > 0}
-					>
-						{linesOptions.map((line, index) => (
-							<option key={line} value={line} style={{ color: 'black' }}>
-								{line}
-							</option>
-						))}
-					</select>
-				</div>
+				<Dropdown
+					options={linesOptions}
+					defaultValue={8}
+					onChange={handleChangeLines}
+					disabled={inGameBallsCount > 0 ? true : false}
+				/>
 			</div>
 			{isAuto ? (
 				<div className="number-of-bets">
