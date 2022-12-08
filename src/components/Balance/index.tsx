@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import CountUp from 'react-countup'
 import balanceDropdown from 'config/balanceDropdown'
 import { ReactComponent as DropdownIcon } from 'assets/icons/dropdown.svg'
 import './balance.scss'
@@ -8,6 +9,9 @@ const Balance = () => {
 	const balance = useGameStore((state) => state.balance)
 	const currency = useGameStore((state) => state.currency)
 	const setCurrency = useGameStore((state) => state.setCurrency)
+	const [prevBalance, setPrevBalance] = useState(balance[currency])
+	const [startbalance, setStartBalance] = useState(balance[currency])
+	const [endBalance, setEndBalance] = useState(balance[currency])
 
 	const [activeCurrency, setActiveCurrency] = useState(0)
 	const [open, setOpen] = useState(false)
@@ -18,10 +22,26 @@ const Balance = () => {
 		setOpen(false)
 	}
 
+	useEffect(() => {
+		let currentBalance = balance[currency]
+		setStartBalance(prevBalance)
+		setEndBalance(currentBalance)
+		setPrevBalance(currentBalance)
+	}, [balance[currency]]) //eslint-disable-line
+
 	return (
 		<div className={`my-current-balance ${open ? 'open' : ''}`}>
 			<div className="content" onClick={() => setOpen((prev) => !prev)}>
-				<span>$ {balance[currency].toFixed(2)}</span>
+				<span>
+					${' '}
+					<CountUp
+						start={startbalance}
+						end={endBalance}
+						duration={0.5}
+						decimals={2}
+						decimal="."
+					/>
+				</span>
 				<div className="currency">
 					<img
 						src={balanceDropdown[activeCurrency].imgUrl}
