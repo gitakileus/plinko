@@ -150,7 +150,7 @@ const BetAction = ({
 					return
 				}
 				balanceState[currency] -= betValue
-				incrementBalance(-betValue)
+				// incrementBalance(betValue * -1)
 				onRunBet(betValue)
 				setCurId((prev) => prev + 1)
 			}

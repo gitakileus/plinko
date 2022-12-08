@@ -56,6 +56,19 @@ const Plinko = () => {
 	soundRef.current = option
 	const [confettiRunning, setConfettiRunning] = useState<number>(0)
 	const { width, height } = useWindowSize()
+	const [ballSoundArray, setBallSoundArray] = useState<any>()
+	const [multiplierSoundArray, setMultiplierSoundArray] = useState<any>()
+	const [ballSoundCount, setBallSoundCount] = useState(0)
+	const [multiplierSoundCount, setMultiplierSoundCount] = useState(0)
+	const baRef = useRef<any>(null)
+	baRef.current = ballSoundArray
+	const bcRef = useRef<any>(null)
+	bcRef.current = ballSoundCount
+	const maRef = useRef<any>(null)
+	maRef.current = multiplierSoundArray
+	const mcRef = useRef<any>(null)
+	mcRef.current = multiplierSoundCount
+	let bc = 0
 
 	useEffect(() => {
 		const queryParams = queryString.parse(window.location.search)
@@ -67,6 +80,18 @@ const Plinko = () => {
 		) {
 			setOption(+queryParams.option)
 		}
+		let _b = new Array(100).fill(new Audio())
+		for (let i = 0; i < 100; i++) {
+			_b[i].src = 'sounds/dot_7.mp3'
+			_b[i].volume = 0.2
+		}
+		setBallSoundArray(_b)
+		let _m = new Array(20).fill(new Audio())
+		for (let i = 0; i < 20; i++) {
+			_m[i].src = 'sounds/reach_2.wav'
+			_m[i].volume = 0.2
+		}
+		setMultiplierSoundArray(_m)
 	}, [])
 
 	// const ballSound = new Audio()
@@ -241,6 +266,9 @@ const Plinko = () => {
 		const target = Math.floor((xPos - pinSize) / (widthUnit * 2))
 
 		if (!muteRef.current) {
+			// maRef.current[mcRef.current % 20].play()
+			// setMultiplierSoundCount((prev) => prev + 1)
+			// bc++
 			const multiplierSound = new Audio()
 			multiplierSound.autoplay = true
 
@@ -264,10 +292,10 @@ const Plinko = () => {
 		// 	target: target,
 		// })
 		if (multiplierValue >= 2.1) {
-			setConfettiRunning(200)
+			setConfettiRunning(400)
 			setTimeout(() => {
 				setConfettiRunning(0)
-			}, 1000)
+			}, 2000)
 		}
 	}
 
@@ -287,7 +315,7 @@ const Plinko = () => {
 			ballSound.autoplay = true
 			switch (soundRef.current) {
 				case 1:
-					ballSound.src = 'sounds/dot_7.mp3'
+					ballSound.src = 'sounds/dot_6.mp3'
 					break
 				case 2:
 					ballSound.src = 'sounds/dot_4_shorter.mp3'
@@ -299,10 +327,17 @@ const Plinko = () => {
 					ballSound.src = 'sounds/dot_2.mp3'
 					break
 				default:
-					ballSound.src = 'sounds/dot_6.mp3'
+					ballSound.src = 'sounds/dot_7.mp3'
 			}
 			ballSound.volume = 0.2
 			ballSound.remove()
+			// setTimeout(() => {
+			// 	setBallSoundCount((prev) => prev - 1)
+			// }, 1000)
+
+			// baRef.current[bc++ % 100].play()
+			// console.log(bc)
+			// setBallSoundCount((prev) => prev + 1)
 		}
 
 		const pairs = event.pairs
@@ -384,7 +419,7 @@ const Plinko = () => {
 			<Confetti
 				width={width}
 				height={height}
-				gravity={0.3}
+				gravity={0.15}
 				numberOfPieces={confettiRunning}
 			/>
 		</MainLayout>
