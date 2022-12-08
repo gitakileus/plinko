@@ -1,12 +1,16 @@
+import { useState } from 'react'
+import ContactModal from 'components/ContactModal'
 import './footer.scss'
 
 const Footer = () => {
+	const [open, setOpen] = useState<boolean>(false)
 	return (
 		<footer>
 			<p className="contact-us">
 				Want to use this game in your project?&nbsp;
-				<a href="https://forms.gle/r1x2L8uTyEZqqgrb7">Contact Us</a>
+				<span onClick={() => setOpen(true)}>Contact Us</span>
 			</p>
+			<ContactModal open={open} onClose={() => setOpen(false)} />
 		</footer>
 	)
 }
