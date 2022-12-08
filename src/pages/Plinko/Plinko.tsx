@@ -12,6 +12,8 @@ import {
 	World,
 } from 'matter-js'
 import axios from 'axios'
+import useWindowSize from 'react-use/lib/useWindowSize'
+import Confetti from 'react-confetti'
 import queryString from 'query-string'
 import { isMobile } from 'react-device-detect'
 import { useGameStore } from 'store/game'
@@ -52,6 +54,8 @@ const Plinko = () => {
 	const [option, setOption] = useState<number>(0)
 	const soundRef = useRef<any>(null)
 	soundRef.current = option
+	const [confettiRunning, setConfettiRunning] = useState<number>(0)
+	const { width, height } = useWindowSize()
 
 	useEffect(() => {
 		const queryParams = queryString.parse(window.location.search)
@@ -259,6 +263,12 @@ const Plinko = () => {
 		// 	xpos: startPos,
 		// 	target: target,
 		// })
+		if (multiplierValue >= 2.1) {
+			setConfettiRunning(200)
+			setTimeout(() => {
+				setConfettiRunning(0)
+			}, 1000)
+		}
 	}
 
 	const onBodyCollision = async (event: IEventCollision<Engine>) => {
@@ -370,6 +380,12 @@ const Plinko = () => {
 				pauseOnFocusLoss={false}
 				rtl={false}
 				draggable
+			/>
+			<Confetti
+				width={width}
+				height={height}
+				gravity={0.3}
+				numberOfPieces={confettiRunning}
 			/>
 		</MainLayout>
 	)
