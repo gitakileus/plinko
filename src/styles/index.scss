@@ -61,6 +61,10 @@ body {
 	font-family: 'Poppins', sans-serif;
 }
 
+button, input {
+	font-family: 'Poppins', sans-serif;
+}
+
 .App {
 	display: flex;
 	flex-direction: column;
@@ -100,4 +104,16 @@ body {
 	@include media-sm {}
 
 	@include media-xs {}
+}
+
+.flex {
+	display: flex;
+}
+
+.ReactModal__Body--open {
+	overflow: hidden !important;
+}
+
+body {
+	overflow-x: hidden !important;
 }

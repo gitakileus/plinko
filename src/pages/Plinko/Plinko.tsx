@@ -136,7 +136,7 @@ const Plinko = () => {
 				},
 			},
 			options: {
-				background: '#14111F',
+				background: 'var(--primary)',
 				hasBounds: true,
 				width: worldWidth,
 				height: worldHeight,
