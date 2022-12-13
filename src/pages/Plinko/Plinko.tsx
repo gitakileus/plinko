@@ -14,7 +14,6 @@ import {
 import axios from 'axios'
 import useWindowSize from 'react-use/lib/useWindowSize'
 import Confetti from 'react-confetti'
-import queryString from 'query-string'
 import { isMobile } from 'react-device-detect'
 import { useGameStore } from 'store/game'
 import { random } from 'utils/random'
@@ -24,11 +23,6 @@ import MainLayout from 'layouts/MainLayout'
 import Panel from './components/BetAction'
 import GameBoard from './components/GameBoard'
 import styles from './plinko.module.scss'
-// import BallAudio from 'assets/sounds/ball.wav'
-// import MultiplierLowAudio from 'assets/sounds/multiplier-low.wav'
-// import MultiplierRegularAudio from 'assets/sounds/multiplier-regular.wav'
-// import MultiplierGoodAudio from 'assets/sounds/multiplier-good.wav'
-// import MultiplierBestAudio from 'assets/sounds/multiplier-best.wav'
 
 const Plinko = () => {
 	const engine = Engine.create()
@@ -51,56 +45,8 @@ const Plinko = () => {
 	)
 	const muteRef = useRef<any>(null)
 	muteRef.current = muted
-	const [option, setOption] = useState<number>(0)
-	const soundRef = useRef<any>(null)
-	soundRef.current = option
 	const [confettiRunning, setConfettiRunning] = useState<number>(0)
 	const { width, height } = useWindowSize()
-	const [ballSoundArray, setBallSoundArray] = useState<any>()
-	const [multiplierSoundArray, setMultiplierSoundArray] = useState<any>()
-	const [ballSoundCount, setBallSoundCount] = useState(0)
-	const [multiplierSoundCount, setMultiplierSoundCount] = useState(0)
-	const baRef = useRef<any>(null)
-	baRef.current = ballSoundArray
-	const bcRef = useRef<any>(null)
-	bcRef.current = ballSoundCount
-	const maRef = useRef<any>(null)
-	maRef.current = multiplierSoundArray
-	const mcRef = useRef<any>(null)
-	mcRef.current = multiplierSoundCount
-	let bc = 0
-
-	useEffect(() => {
-		const queryParams = queryString.parse(window.location.search)
-		if (
-			queryParams.option !== undefined &&
-			queryParams.option !== null &&
-			queryParams.option >= '1' &&
-			queryParams.option <= '4'
-		) {
-			setOption(+queryParams.option)
-		}
-		let _b = new Array(100).fill(new Audio())
-		for (let i = 0; i < 100; i++) {
-			_b[i].src = 'sounds/dot_7.mp3'
-			_b[i].volume = 0.2
-		}
-		setBallSoundArray(_b)
-		let _m = new Array(20).fill(new Audio())
-		for (let i = 0; i < 20; i++) {
-			_m[i].src = 'sounds/reach_2.wav'
-			_m[i].volume = 0.2
-		}
-		setMultiplierSoundArray(_m)
-	}, [])
-
-	// const ballSound = new Audio()
-	// ballSound.src = 'sounds/dot_4.wav'
-	// ballSound.volume = 0.2
-
-	// const multiplierSound = new Audio()
-	// multiplierSound.src = 'sounds/reach_2.wav'
-	// multiplierSound.volume = 0.2
 
 	const alertUser = (e: BeforeUnloadEvent) => {
 		if (inGameBallsCount > 0) {
@@ -121,7 +67,6 @@ const Plinko = () => {
 		engine.gravity.y = isMobile
 			? engineConfig.engineGravity * 2
 			: engineConfig.engineGravity
-		// engine.gravity.y = engineConfig.engineGravity
 		const element = document.getElementById('plinko')
 		const render = Render.create({
 			element: element!,
@@ -266,9 +211,6 @@ const Plinko = () => {
 		const target = Math.floor((xPos - pinSize) / (widthUnit * 2))
 
 		if (!muteRef.current) {
-			// maRef.current[mcRef.current % 20].play()
-			// setMultiplierSoundCount((prev) => prev + 1)
-			// bc++
 			const multiplierSound = new Audio()
 			multiplierSound.autoplay = true
 
@@ -313,22 +255,6 @@ const Plinko = () => {
 		if (!muteRef.current) {
 			const ballSound = new Audio()
 			ballSound.autoplay = true
-			switch (soundRef.current) {
-				case 1:
-					ballSound.src = 'sounds/dot_6.mp3'
-					break
-				case 2:
-					ballSound.src = 'sounds/dot_4_shorter.mp3'
-					break
-				case 3:
-					ballSound.src = 'sounds/dot_4.wav'
-					break
-				case 4:
-					ballSound.src = 'sounds/dot_2.mp3'
-					break
-				default:
-					ballSound.src = 'sounds/dot_7.mp3'
-			}
 			ballSound.volume = 0.2
 			ballSound.remove()
 			// setTimeout(() => {
