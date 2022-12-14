@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { ReactComponent as CloseIcon } from 'assets/icons/close.svg'
+import { ReactComponent as CloseIcon } from 'assets/icons/close-icon.svg'
 import { ReactComponent as PointerHandIcon } from 'assets/icons/pointer-hand.svg'
 import styles from './contact.module.scss'
 
@@ -26,7 +26,9 @@ const ContactModal = (props: ContactModalProps) => {
 				<div className="modal-content">
 					<div className="modal-header">
 						<h1>Want to use this game in your project?</h1>
-						<CloseIcon onClick={onClose} />
+						<div>
+							<CloseIcon onClick={onClose} />
+						</div>
 					</div>
 					<div className="modal-body">
 						<img src="/images/shake-hands.png" alt="" />

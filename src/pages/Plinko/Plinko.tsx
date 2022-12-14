@@ -24,7 +24,7 @@ import Panel from './components/BetAction'
 import GameBoard from './components/GameBoard'
 import styles from './plinko.module.scss'
 import ContactModal from 'components/ContactModal'
-import { ReactComponent as ContactIcon } from 'assets/icons/money.svg'
+import { ReactComponent as ContactIcon } from 'assets/icons/shake-hand.svg'
 
 const Plinko = () => {
 	const engine = Engine.create()
@@ -333,7 +333,10 @@ const Plinko = () => {
 						isAuto={isAuto}
 					/>
 				</div>
-				<ContactIcon className="contact-money-icon" onClick={() => setOpen(true)} />
+				<div className="contact-icon" onClick={() => setOpen(true)}>
+					<ContactIcon className="contact-money-icon" />
+				</div>
+
 				<ContactModal open={open} onClose={() => setOpen(false)} />
 			</div>
 			<ToastContainer

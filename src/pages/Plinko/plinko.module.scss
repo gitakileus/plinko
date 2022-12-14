@@ -310,13 +310,26 @@
 			}
 		}
 
-		.contact-money-icon {
+		.contact-icon {
 			position: fixed;
 			bottom: 36px;
 			right: 36px;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border: 1px solid #F8DD4A;
+			border-radius: 100px;
+			width: 56px;
+			height: 56px;
 			// @media (max-width: 999px) {
 			// 	right: -100px;
 			// }
+
+			svg {
+				width: 34px;
+				height: 34px;
+			}
 
 			@include media-sm {
 				display: none;

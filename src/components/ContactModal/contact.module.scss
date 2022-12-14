@@ -38,10 +38,30 @@
           color: #F6D355;
         }
 
-        svg {
-          cursor: pointer;
+        div {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid #F6D355;
+          border-radius: 11px;
           width: 22px;
           height: 22px;
+
+          svg {
+            cursor: pointer;
+            width: 10px;
+            height: 10px;
+
+            path {
+              fill: #F6D355;
+            }
+          }
+          &:hover {
+            background-color: #F6D355;
+            svg path {
+              fill: black;
+            }
+          }
         }
       }
 
@@ -61,6 +81,7 @@
           font-size: 12px;
           line-height: 1.5;
           color: #EAE5D3;
+
           @include media-xs {
             max-width: 250px;
           }

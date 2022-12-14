@@ -112,9 +112,10 @@ button, input {
 }
 
 .ReactModal__Body--open {
-	overflow: hidden !important;
+	overflow: auto !important;
 }
 
 body {
 	overflow-x: hidden !important;
+	overflow-y: auto !important;
 }
