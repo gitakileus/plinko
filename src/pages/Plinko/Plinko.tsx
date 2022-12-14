@@ -23,6 +23,8 @@ import MainLayout from 'layouts/MainLayout'
 import Panel from './components/BetAction'
 import GameBoard from './components/GameBoard'
 import styles from './plinko.module.scss'
+import ContactModal from 'components/ContactModal'
+import { ReactComponent as ContactIcon } from 'assets/icons/money.svg'
 
 const Plinko = () => {
 	const engine = Engine.create()
@@ -47,6 +49,7 @@ const Plinko = () => {
 	muteRef.current = muted
 	const [confettiRunning, setConfettiRunning] = useState<number>(0)
 	const { width, height } = useWindowSize()
+	const [open, setOpen] = useState<boolean>(false)
 
 	const alertUser = (e: BeforeUnloadEvent) => {
 		if (inGameBallsCount > 0) {
@@ -330,6 +333,8 @@ const Plinko = () => {
 						isAuto={isAuto}
 					/>
 				</div>
+				<ContactIcon className="contact-money-icon" onClick={() => setOpen(true)} />
+				<ContactModal open={open} onClose={() => setOpen(false)} />
 			</div>
 			<ToastContainer
 				position="top-right"

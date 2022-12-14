@@ -10,6 +10,7 @@
 	}
 
 	.plinko-container {
+		position: relative;
 		padding-top: 24px;
 		padding-bottom: 40px;
 		max-width: 1200px;
@@ -306,6 +307,20 @@
 						}
 					}
 				}
+			}
+		}
+
+		.contact-money-icon {
+			position: absolute;
+			bottom: 0;
+			right: 0;
+
+			@media (max-width: 999px) {
+				right: -100px;
+			}
+
+			@include media-sm {
+				display: none;
 			}
 		}
 	}
