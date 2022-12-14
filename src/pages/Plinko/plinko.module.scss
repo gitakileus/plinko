@@ -311,13 +311,12 @@
 		}
 
 		.contact-money-icon {
-			position: absolute;
-			bottom: 0;
-			right: 0;
-
-			@media (max-width: 999px) {
-				right: -100px;
-			}
+			position: fixed;
+			bottom: 36px;
+			right: 36px;
+			// @media (max-width: 999px) {
+			// 	right: -100px;
+			// }
 
 			@include media-sm {
 				display: none;
