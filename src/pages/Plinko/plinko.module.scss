@@ -262,7 +262,7 @@
 							width: 144px;
 							height: 144px;
 							transform: translate3d(-50%, -50%, 0);
-							background: radial-gradient(#EA334742, #EA334700, transparent);
+							background: radial-gradient(50% 50% at 50% 50%, rgba(234, 51, 71, 0.13) 0%, rgba(234, 51, 71, 0) 100%);
 						}
 
 						&.highlighted {
