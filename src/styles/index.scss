@@ -62,7 +62,8 @@ body {
 	font-family: 'Poppins', sans-serif;
 }
 
-button, input {
+button,
+input {
 	font-family: 'Poppins', sans-serif;
 }
 
@@ -118,4 +119,50 @@ button, input {
 body {
 	overflow-x: hidden !important;
 	overflow-y: auto !important;
+}
+
+.ReactModal__Content {
+	opacity: 0;
+	margin-top: 96px;
+
+	@include media-sm {
+		margin-top: 48px
+	}
+}
+
+.ReactModal__Content--after-open {
+	opacity: 100;
+	margin-top: 0;
+}
+
+.ReactModal__Content--before-close {
+	opacity: 0;
+	margin-top: 96px;
+
+	@include media-sm {
+		margin-top: 48px;
+	}
+}
+
+.contact-modal {
+	position: fixed;
+	z-index: 4;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: #110916CC;
+
+	.ReactModal__Content {
+		position: absolute;
+		inset: 0 !important;
+		top: 50% !important;
+		left: 50% !important;
+		transform: translate(-50%, -50%);
+		background: transparent !important;
+		border: none !important;
+		padding: 0 !important;
+		width: fit-content;
+		height: fit-content;
+	}
 }
