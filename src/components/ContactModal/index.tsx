@@ -59,7 +59,7 @@ const ContactModal = (props: ContactModalProps) => {
 						<div className="modal-footer">
 							<button
 								onClick={() =>
-									(window.location.href = 'https://forms.gle/r1x2L8uTyEZqqgrb7')
+									window.open('https://forms.gle/r1x2L8uTyEZqqgrb7', '_blank')
 								}
 							>
 								<PointerHandIcon /> Contact Us

@@ -18,7 +18,7 @@
 		@media (max-width: 999px) {
 			padding-top: 24px;
 			padding-bottom: 24px;
-			max-width: 400px;
+			max-width: 440px;
 
 			.game-box {
 				border-width: 3px !important;
@@ -26,7 +26,7 @@
 		}
 
 		@include media-sm {
-			padding-top: 40px;
+			padding-top: 0px;
 		}
 
 		.game-box {

@@ -11,8 +11,6 @@
     border-radius: 14px;
     box-shadow: 0px 6px 5px 0px #00000040;
     padding: 2px;
-    max-width: 500px;
-    width: 100%;
     background-image: linear-gradient(#F9E851, #F9931C);
 
     .modal-content {
@@ -59,6 +57,7 @@
         gap: 6px;
 
         h1 {
+          margin-top: 4px;
           font-size: 24px;
           line-height: 1.5;
           font-weight: 500;
@@ -116,7 +115,6 @@
     }
 
     @include media-sm {
-      width: 320px;
       .modal-content {
         padding: 20px 12px;
         .modal-header {

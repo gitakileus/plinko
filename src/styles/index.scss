@@ -124,7 +124,6 @@ body {
 .ReactModal__Content {
 	opacity: 0;
 	margin-top: -96px;
-	width: max-content !important;
 
 	@include media-sm {
 		margin-top: -48px
@@ -163,7 +162,11 @@ body {
 		background: transparent !important;
 		border: none !important;
 		padding: 0 !important;
-		width: fit-content;
 		height: fit-content;
+		width: 640px;
+
+		@include media-sm {
+			width: calc(100vw - 40px);
+		}
 	}
 }
