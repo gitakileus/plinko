@@ -43,18 +43,17 @@ const ContactModal = (props: ContactModalProps) => {
 			<div className={styles.contact} onClick={onClose}>
 				<div className="gradient-wrapper">
 					<div className="modal-content">
+						<div className="close-icon">
+							<CloseIcon onClick={onClose} />
+						</div>
 						<div className="modal-header">
-							<h1>Want to use this game in your project?</h1>
-							<div>
-								<CloseIcon onClick={onClose} />
-							</div>
+							<h1>Interested in adding this game to your project?</h1>
 						</div>
 						<div className="modal-body">
 							<img src="/images/shake-hands.png" alt="" />
 							<p>
-								Placeholder text about how this modern
-								<br />
-								<b>Web 3 Casino Solutions</b> Available for Rent
+								<b>Web3 Casino Suite</b> - is our white-label solution for third parties.
+								Reach out today and start earning with your version of this game.
 							</p>
 						</div>
 						<div className="modal-footer">
